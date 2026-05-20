@@ -1,0 +1,324 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+\usepackage{graphicx}
+\usepackage{minted}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{problem}{Problem}
+
+% shortcuts for blackboard bold number sets (reals, integers, etc.)
+\newcommand{\QQ}{\ensuremath{\mathbb Q}}
+\newcommand{\RR}{\ensuremath{\mathbb R}}
+\newcommand{\NN}{\ensuremath{\mathbb N}}
+\newcommand{\ZZ}{\ensuremath{\mathbb Z}}
+
+% Make header with name and date etc.
+\usepackage{fancyhdr}
+\lhead{Kaelin Ellis\\Math 320: Combinatorics}
+\rhead{\today\\Assignment 2}
+\pagestyle{fancy}
+
+\usepackage[utf8]{inputenc}
+\setlength{\parindent}{0pt} % Don't indent new paragraphs
+\setlength{\headheight}{24pt}
+
+\setcounter{problem}{0}
+
+\begin{document}
+
+\section{Chapter 1.2}
+\begin{problem} % Problem 1
+The following are \textit{answers} to counting questions. Your job is to write a question for each.
+\begin{enumerate}[(b)]
+    \item $n^n - n!$
+\end{enumerate}
+\end{problem}
+
+\textbf{Answer:}
+\begin{enumerate}[(b)]
+    \item Breaking this down into the two parts:
+    \begin{itemize}
+        \item $n^n$ - How many $n$ length lists are made with repitition from an $n$ length set?
+        \item $n!$ - How many $n$ length lists are made without repitition from an $n$ length set?
+    \end{itemize}
+    Putting together is "How many different n-lists are made from an n-set that repeat at least 1 character"?
+\end{enumerate}
+
+\begin{problem} % Problem 2
+How many different outcomes are there in a best of nine series between two teams A and B. Generalize to a best of $n$ series where $n$ is odd.
+\end{problem}
+
+\textbf{Answer:}
+This problem needs to be broken up so if the first or second team wins the first five games, it is over. Most likely requires summation principle.
+
+\setcounter{problem}{3}
+\begin{problem} % Problem 4
+A group consists of 12 men and eight women. How many ways are there to $\dots$
+\begin{enumerate}[(a)]
+\item form a committee of size 5?
+\item form a committee of size 5 containing two men and three women?
+\item form a committee of size 6 containing at least three women?
+\item form a committee of size 10 containing at least four women?
+\item form an all-male commitee of any size?
+\end{enumerate}
+\end{problem}
+
+\textbf{Answer:}
+\begin{enumerate}[(a)]
+    \item $\dbinom{20}{5}$
+    \item $\dbinom{12}{2} \times \dbinom{8}{3}$
+    \item \begin{equation*}
+        \dbinom{8}{3} \cdot \dbinom{12}{6-3} + \dbinom{8}{4} \cdot \dbinom{12}{6-4} + \dbinom{8}{5} \cdot \dbinom{12}{6-5} + \dbinom{8}{6} \cdot \dbinom{12}{6-6} = \sum_{k=3}^{6}\dbinom{8}{k} \cdot \dbinom{12}{6-k}
+    \end{equation*}
+    \item \begin{equation*}
+        \sum_{k=4}^{8}\dbinom{8}{k} \cdot \dbinom{12}{10-k}
+    \end{equation*}
+    \item \begin{equation*}
+        \sum_{k=1}^{12}\dbinom{12}{k}
+    \end{equation*}
+\end{enumerate}
+
+\begin{problem} % Problem 5
+How many eight-chracter passwords are there if each character is either and uppercase letter A-Z, a lowercase letter a-z, or a digit 0-9, and where at least one character of the three types is used?
+\end{problem}
+
+\textbf{Answer:}\smallskip
+
+This will be answered by counting the complement. If each character was free, the number of lists would be $62^8$. The lists to remove are:
+\begin{itemize}
+    \item All numbers are $10^8$ cases
+    \item All uppercase letters are $26^8$ cases
+    \item All lowercase letters are $26^8$ cases
+    \item Only numbers or lowercase are $36^8$
+    \item Only numbers or uppercase are $36^8$
+    \item Only uppercase or lowercase are $52^8$
+\end{itemize}
+The final answer is $62^8 - 52^8 - 2 \cdot 36^8 + 2 \cdot 26^8 + 10^8$. (I'm not 100\% sure of the answer, Claude said something about PIE, or the Principle of Inclusion-Exclusion).
+
+\setcounter{problem}{7}
+\begin{problem} % Problem 8
+Let $k$ and $n$ be positive integers satisfying $k < n$. How many subsets of [n] are not also subsets of [k]?
+\end{problem}
+
+\textbf{Answer:}
+\begin{itemize}
+    \item Number of subsets of $[k]$ is $2^k$
+    \item Number of subsets of $[n]$ is $2^n$
+\end{itemize}
+Subtract subsets of $[k]$ from subsets of $[n]$. The answer is $2^{n} - 2^{k}$.
+
+\setcounter{problem}{9}
+\begin{problem} % Problem 10
+    How many permutations of [n] are possible in which no even numbers and no odd numbers are adjacent?
+\end{problem}
+
+\textbf{Answer:}
+Break this problem into two problems. The first part would be the number of permutations with only even numbers. The second part is permutations with only odd numbers. Two examples are shown for an odd case [3] and an even case [4]. For [3], the sets appear as
+
+\begin{center}
+\begin{tabular}{c|c|c}
+    Bindary & Set & Type \\
+    \hline
+    000 & $\varnothing$ & N/A \\
+    100 & $\{1\}$ & Odd \\
+    010 & $\{2\}$ & Even \\
+    001 & $\{3\}$ & Odd \\
+    101 & $\{1,3\}$ & Odd
+\end{tabular}
+\end{center}
+
+The number of odd sets is $2^{(n+1)/2}-1$ which discards the empty set. The number of even sets is $2^{(n-1)/2}-1$ which again discards the empty set. Adding in the empty set yields $2^{(n+1)/2} + 2^{(n-1)/2} - 1$. For [4], the sets appear as
+
+\begin{center}
+\begin{tabular}{c|c|c}
+    Bindary & Set & Type \\
+    \hline
+    0000 & $\varnothing$ & N/A \\
+    1000 & $\{1\}$ & Odd \\
+    0100 & $\{2\}$ & Even \\
+    0010 & $\{3\}$ & Odd \\
+    0001 & $\{4\}$ & Even \\
+    1010 & $\{1,3\}$ & Odd \\
+    0101 & $\{2,4\}$ & Even
+\end{tabular}
+\end{center}
+
+With an even number, the number of odd sets is $2^{n/2}-1$ which discards the empty set. The number of even sets is $2^{n/2}-1$, which again discards the empty set. Adding in the empty set yields $2 \cdot 2^{n/2} - 1$.
+
+\setcounter{problem}{15}
+\begin{problem} % Problem 16
+    How many 4-permutations of [10] have maximum element equal to 6? How many have maximum element at most 6?
+\end{problem}
+
+\textbf{Answer:}
+The first part implies that out of the four values, one of the values must be six. What is curious, is how to prevent double counting. I think, you'd want to use the complement here. The base option are 4-list permutations which allow allow value to float between $1-6$, then remove all the permutations that don't contain a six, which implies the values only float between $1-5$. This appears as $6^{4} - 5^{4}$. \medskip
+
+I'm struggling to see why this second part is difficult...it feels like I just need to list the 4-permutations that can use [6] instead of [10]? To me, this appears as $6^{4}$.
+
+\setcounter{problem}{17}
+\begin{problem} % Problem 18
+    This is an excellent exercise for practicing counting. Find the number of five-card hands, dealt from a standard 52-card deck, that contains
+    \begin{enumerate}[(a)]
+        \item A royal flush (A-K-Q-J-10 all in one suit).
+        \item A straight flush (five cards of consecutive denominations all in one suit, but not a roayl flush)
+    \end{enumerate}
+\end{problem}
+
+\textbf{Answer:}
+The two parts of this problem seem simple and don't require permutation or combination formulas.
+
+\begin{enumerate}[(a)]
+    \item There are four suits and each suit has a royal flush. As such, there are four hands that can be dealt that will result in a royal flush.
+    \item Assuming that $(A, 2, 3, 4, 5)$ is not a valid combination and the lowest flush is $(2, 3, 4, 5, 6)$. The highest flush possible (no including a royal) is $(9, 10, J, Q, K)$. Each suit has eight flushes possible. So the numbers of different straight flushes is $4 \cdot 8 = 32$.
+\end{enumerate}
+
+\section{Chapter 1.3}
+\setcounter{problem}{0}
+\begin{problem}
+    The less-than relation on [4] is the set
+    \begin{equation*}
+        R = \{(1,2), (1,3), (1,4), (2,3), (2,4), (3,4)\}
+    \end{equation*}
+    In other words, $(a,b) \in R$ if and only if $a<b$. It contains six ordered pairs.
+    \begin{enumerate}[(a)]
+        \item How many ordered pairs are in the less-than relation on [n]?
+        \item How many are in the less-than-or-equal relation on [n]?
+    \end{enumerate}
+\end{problem}
+
+\textbf{Answer:}
+\begin{enumerate}[(a)]
+    \item A pattern emerges when looking at the n-case for the less than relation. If the ordered pairs are sorted by the leading digit, it appears as:
+    \begin{center}
+    \begin{tabular}{c|c}
+        Leading Digit & Ordered Pairs \\
+        \hline
+        1 & n-1 \\
+        2 & n-2 \\
+        3 & n-3 \\
+        $\dots$ & $\dots$ \\
+        n-3 & 3 \\
+        n-2 & 2 \\
+        n-1 & 1 \\
+        n & 0
+    \end{tabular}
+    \end{center}
+    When the leading digit is $n$ there are no ordered pairs. Additionally, add all the ordered pairs together, you get numerical cancellation, since $(n-1)+1=n$ and $(n-2)+2=n$ which can be done for all the values. The number of n present will be $\frac{n-1}{2}$. As such, the number of ordered pairs will be $\dfrac{n(n-1)}{2}$.
+    \item A pattern emerges when looking at the n-case for the less than or equal relation. If the ordered pairs are sorted by the leading digit, it appears as:
+    \begin{center}
+    \begin{tabular}{c|c}
+        Leading Digit & Ordered Pairs \\
+        \hline
+        1 & n \\
+        2 & n-1 \\
+        3 & n-2 \\
+        4 & n-3 \\
+        $\dots$ & $\dots$ \\
+        n-2 & 3 \\
+        n-1 & 2 \\
+        n & 1
+    \end{tabular}
+    \end{center}
+    This is similiar to the previous case, but now an extra $n$ appears to account for the first case. Again, all the ordered pairs are added which results in numerical cancellation, since $(n-1)+1=n$ and $(n-2)+2=n$. As such, the number of n is $\frac{n+1}{2}$ and the number of ordered pairs is $\dfrac{n(n+1)}{2}$.
+\end{enumerate}
+
+\setcounter{problem}{5}
+\begin{problem}
+    Give a bijective proof: The number of n-digit binary numbers with exactly k 1s equals the number of k-subsets of [n]. (Refer to Figure 1.2 on Page 25)
+\end{problem}
+
+\begin{proof}
+% --- SETUP ---
+Let $B = \{n\text{-digit binary strings with exactly } k \text{ ones}\}$.\\
+Let $C = \{k\text{-subsets of } [n]\}$.\\
+Define $f: B \rightarrow C$ by $f(b) = \{i \in [n] : b_i = 1\}$, 
+where $b = (b_1, b_2, \dots, b_n)$.\\
+We will show $f$ is a bijection.\\
+
+% --- ONE-TO-ONE ---
+\textbf{One-to-one:}\\
+Suppose $b_\alpha, b_\beta \in B$ with $b_\alpha \neq b_\beta$.\\
+Then there exists some index $j \in [n]$ where $b_{\alpha,j} \neq b_{\beta,j}$.\\
+WLOG, $b_{\alpha,j} = 1$ and $b_{\beta,j} = 0$.\\
+So $j \in f(b_\alpha)$ but $j \notin f(b_\beta)$.\\
+Therefore $f(b_\alpha) \neq f(b_\beta)$, so $f$ is one-to-one.\\
+
+% --- ONTO ---
+\textbf{Onto:}\\
+Let $c \in C$ be an arbitrary $k$-subset of $[n]$.\\
+Define $b = (b_1, \dots, b_n)$ by $b_i = 1$ if $i \in c$ and $b_i = 0$ if $i \notin c$.\\
+\textit{Step 1, $b \in B$:}\\
+By construction, $b_i = 1$ exactly when $i \in c$. So the number of ones in $b$ equals $|c| = k$, so $b \in B$.\\
+\textit{Step 2, $f(b) = c$:}\\
+For any $i \in [n]$:\\
+$i \in f(b) \iff b_i = 1$ \quad (definition of $f$)\\
+$\iff i \in c$ \quad (construction of $b$)\\
+So $f(b) = c$.\\
+Since $c$ was arbitrary, $f$ is onto.\\
+
+% --- CONCLUSION ---
+Since $f$ is one-to-one and onto, $f$ is a bijection, so $|B| = |C|$.
+\end{proof}
+
+\begin{problem}
+    Prove Theorem 1.3.7, If $f$ is a function, then the inverse relation $f^{-1}$ is a function if and only if $f$ is one-to-one. In that case dom($f^{-1}$) = rng($f$) and rng($f^{-1}$) = dom($f$).
+\end{problem}
+
+\begin{proof}
+    \textit{Contrapositive:} Suppose that $f$ is not one-to-one.\\
+    Then there exists $a_1, a_2 \in A$ where $f(a_1) = f(a_2) = b$ but $a_1 \neq a_2$.\\
+    As such there are two pairs $(a_1, b), (a_2, b) \in f$.\\
+    So $(b, a_1), (b, a_2) \in f^{-1}$ and since $a_1 \neq a_2$, $f^{-1}$ assigns two different outputs to the input b, so it is not a function.\\
+    Therefore if $f^{-1}$ is a function, $f$ is one-to-one.\\
+    \smallskip\\
+    Suppose that $f: A \rightarrow B$ is a function which is one-to-one.\\
+    For the inverse of $f$ suppose $(b, a_1) \in f^{-1}$ and $(b, a_2) \in f^{-1}$.\\
+    So for $f$ there exists $(a_1, b) \in f$ and $(a_2, b) \in f$.\\
+    Since $f$ is one-to-one then $a_1 = a_2$.\\
+    Therefore $f^{-1}$ is a function.
+\end{proof}
+
+This is the proof for the ``In that case'' where you examine the domain and range.
+
+\begin{proof}
+For any $b$: \\
+$b \in$ dom($f^{-1}$) $\iff \exists a, (b,a) \in f^{-1}$ \quad (definition of domain) \\
+$\iff \exists a, (a,b) \in f$ \quad (definition of inverse relation) \\
+$\iff b \in$ rng($f$) \quad (definition of range) \\
+Since this holds for all $b$, dom($f^{-1}$) = rng($f$).
+\end{proof}
+
+\setcounter{problem}{9}
+\begin{problem}
+    Suppose $A$ and $B$ are finite sets with $|A| = |B|$ and that $f: A \rightarrow B$ is a function. Prove $f$ is one-to-one if and only if $f$ is onto.
+\end{problem}
+
+\begin{proof}
+    $A$ and $B$ has $|A| = |B|$ and $f: A \rightarrow B$ is a function.\\
+    Suppose $f$ is one-to-one.\\
+    Since $f$ is one-to-one then for each $a_{i}, a_{j} \in A$ if $i \neq j$ then $f(a_i) \neq f(a_j)$.\\
+    $\dots$\\
+    As such for each $b_i \in B$ there exists some $a_i \in A$ such that $f(a_i) = b_i$.\\
+    Therefore $f$ is onto.\\
+    \smallskip\\
+    Suppose that $f$ is onto.\\
+    Since $f$ is onto, for each $b_i \in B$ there exists some $a_i \in A$ such that $f(a_i) = b_i$.\\
+    $\dots$\\
+    As such for each $a_1, a_2 \in A$ if $a_1 \neq a_2$, then $f(a_1) \neq f(a_2)$.\\
+    Therefore $f$ is one-to-one.
+\end{proof}
+
+Crappy backup ``Defining $n = |A| = |B|$, where $i \in [n]$.\\''.
+
+\end{document}
+

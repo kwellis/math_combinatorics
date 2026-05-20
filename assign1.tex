@@ -1,0 +1,134 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+\usepackage{graphicx}
+\usepackage{minted}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{problem}{Problem}
+
+% shortcuts for blackboard bold number sets (reals, integers, etc.)
+\newcommand{\QQ}{\ensuremath{\mathbb Q}}
+\newcommand{\RR}{\ensuremath{\mathbb R}}
+\newcommand{\NN}{\ensuremath{\mathbb N}}
+\newcommand{\ZZ}{\ensuremath{\mathbb Z}}
+
+% Make header with name and date etc.
+\usepackage{fancyhdr}
+\lhead{Kaelin Ellis\\Math 320: Combinatorics}
+\rhead{\today\\Assignment 1}
+\pagestyle{fancy}
+
+\usepackage[utf8]{inputenc}
+\setlength{\parindent}{0pt} % Don't indent new paragraphs
+\setlength{\headheight}{24pt}
+
+\setcounter{problem}{0}
+
+\begin{document}
+
+\section{Chapter 1.1}
+
+\begin{problem} % Problem 1
+How many different tickets are possible in each of the following lotteries? And which lottery offers the best chance of winning?
+\begin{enumerate}[(a)]
+    \item You pick six numbers from 1-16, a number can be picked more than once, and order doesn't matter.
+    \item You pick five different numbers from 1-25 and order doesn't matter.
+    \item You pick four different numbers from 1-18 and the order in which you specify them matters.
+\end{enumerate}
+\end{problem}
+
+\textbf{Answer:}
+\begin{enumerate}[(a)]
+    \item A multiset combination where $k = 6$ and $n=16$ which is:
+    \begin{equation*}
+        \dbinom{6+16-1}{6} = \dbinom{21}{6} = \dfrac{21!}{6!15!} = 54,264
+    \end{equation*}
+    \item A subset combination where $k = 5$ and $n=25$ which is:
+    \begin{equation*}
+        \dbinom{25}{5} = \dfrac{25!}{5!(25-5)!} = \dfrac{25!}{5!20!} = 53,130
+    \end{equation*}
+    \item A permutation with no repetition where $k = 4$ and $n=18$.
+    \begin{equation*}
+        (18)_{4} = \dfrac{18!}{(18-4)!} = \dfrac{18!}{14!} = 73,440
+    \end{equation*}
+\end{enumerate}
+The second lottery appears to have the best odds of winning.
+
+\begin{problem} % Problem 2
+
+You flip a coin 20 times and record the ordered sequence of heads and tails.
+
+\begin{enumerate}[(a)]
+\item How many sequences are there in which you get heads on (at least) flip \#1, \#4, \#7, and \#13?
+
+\item How many sequences have the same number of heads and tails?
+\end{enumerate}
+\end{problem}
+
+\textbf{Answer:}
+\begin{enumerate}[(a)]
+    \item Each choice can be a $\{0, 1\}$ for heads or tails. As a result $n=2$. The positions 1, 4, 7, and 13 have already been decided. This leaves 16 positions available for a head or tails selection. The answer is $2^{16}$.
+    \item How many combinations of 20 positions have exactly 10 heads? The answer is $\dbinom{20}{10}$. How many times can you write a 20 character long string with exactly 10 digits being locked?
+\end{enumerate}
+
+
+\setcounter{problem}{8}
+\begin{problem} % Problem 9
+How many subsets of $[20] \dots$
+\begin{enumerate}[(a)]
+\item Have smallest element 4 and largest element 15?
+\item Contain no even numbers?
+\item Have size 10 and don't contain any number larger than 17?
+\end{enumerate}
+\end{problem}
+
+\textbf{Answer:}
+\begin{enumerate}[(a)]
+    \item How many subsets can be written with the numbers between 4 and 15, do not include the empty set. If $B = \{x\in \ZZ: 4 \le x \le 15 \} = \{4, 5, 6, \dots 15\}$. This is asking for the size of the power set of B, but ignoring the empty set. $|\mathscr{P}(B)| = 2^{15-3} = 4096$. The answer is $4096-1 = 4095$. This problem can be thought as binary sequence of 12 digits. Each digit corresponds to whether the number 4 - 15 is included. If the digit is a one, it is included. If the digit is zero, it is not included.
+    \item Again, using the analogy that this problem can be thought as a binary sequence with a 0 implying the digit is not included and a 1 implying the digit is included. As such, all the even numbers are automatically swapped to a 0, so only 1 choice. The odd numbers can be a 0 or 1, so two choices. There are 10 odd numbers between 1 and 20. So the answer is $2^{10}$.
+    \item This is asking for a subset that is length 10, or $k = 10$. The number of choices has been restricted to 17, so $n=17$. It is a subset, so no repetition is allowed. As such the answer is $\dbinom{17}{10}$.
+\end{enumerate}
+
+\setcounter{problem}{13}
+\begin{problem} % Problem 14
+How many arthmetic problems of the following form are possible? You must use each of the digits 1 through 9, they must appear in numerical order from left to right, and you can use any combination of $+$ and $\times$ symbols you like, as long as the resulting expression makes mathematical sense. For example $1234 + 5 \times 6 \times 78 + 9$ and $123456 + 789$ and $123456789$ are three possibilities, but $1 \times \times 234567 + 89$ is not.
+\end{problem}
+
+\textbf{Answer:}\smallskip
+
+In between the sets of two numbers are eight spaces. Each one of these spaces can be inserted with no symbol, a $+$ symbol or a $\times$ symbol. This means there are 3 choices or $n=3$ for a list of length 8, or $k=8$. The answer is $3^8$.
+
+
+\setcounter{problem}{16}
+\begin{problem} % Problem 17
+Find the number of 3-lists of the form $(x_1, x_2, x_3)$, where each $x_i$ is a nonnegative integer and $x_1 + x_2 + x_3 = 10$.
+\end{problem}
+
+\textbf{Answer:}\smallskip
+
+Define $X = \{x_1, x_2, x_3\}$, where $X$ is a multiset. If the values in $X$ are nonnegative and all 3 values must sum to 10, then $X \subseteq A$. Where
+\begin{equation*}
+    A = \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}
+\end{equation*}
+Because this is a list, the $x_1$ sets the appropriate range of the $x_2$ with $x_2 \le 10 - x_1$. Then $x_1$ and $x_2$ set $x_3$ with $x_3 = 10 - x_1 - x_2$. As such, only the first two values have multiple options.
+\begin{enumerate}
+    \item If $x_1 = 0$ then $x_2 \le 10$, which has 11 choices.
+    \item If $x_1 = 1$ then $x_2 \le 9$, which has 10 choices.
+    \item If $x_1 = 2$ then $x_2 \le 8$, which has 9 choices.
+    \item If $x_1 = 3$ then $x_2 \le 7$, which has 8 choices.
+    \item $\dots$
+    \item If $x_1 = 10$ then $x_2 = 0$, which is 1 choice.
+\end{enumerate}
+As the value for $x_1$ increase, the options for $x_2$ decreases. The answer is represented by $11!$.
+\end{document}
+

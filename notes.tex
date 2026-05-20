@@ -1,0 +1,500 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+\usepackage{graphicx}
+\usepackage{minted}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{problem}{Problem}
+
+\newcommand{\QQ}{\ensuremath{\mathbb Q}}
+\newcommand{\RR}{\ensuremath{\mathbb R}}
+\newcommand{\NN}{\ensuremath{\mathbb N}}
+\newcommand{\ZZ}{\ensuremath{\mathbb Z}}
+\newcommand{\II}{\ensuremath{\mathbb{I}}}
+\newcommand{\veps}{\mathord{\scalebox{1.4}{\ensuremath{\varepsilon}}}}
+
+% Make header with name and date etc.
+\usepackage{fancyhdr}
+\lhead{Kaelin Ellis\\Math 320: Combinatorics}
+\rhead{\today\\Notes}
+\pagestyle{fancy}
+
+\usepackage[utf8]{inputenc}
+\setlength{\parindent}{0pt} % Don't indent new paragraphs
+\setlength{\headheight}{24pt}
+
+
+\begin{document}
+
+\section{Principles of Combinatorics}
+
+Combinatorics starts off with counting, more specifically it discusses counting vs enumeration. \textbf{enumeration} is where you list all the numbers that you are trying to count. Unfortunately, this becomes impossible very quickly for large problems, so a different way to count than only enumeration needs to be established.
+
+\subsection{Typical counting questions}
+
+Nomenclature
+\begin{enumerate}
+    \item $[n]$ denotes the set of the first $n$ positive integers. For example, $[4] = \{1, 2, 3, 4\}$ and $[1] = \{1\}$.
+    \item $\ZZ$ is the integer set.
+    \item $\NN$ is the natural numbers (positive integers).
+    \item $\QQ$ is the rational number set.
+    \item $\RR$ are the real numbers.
+\end{enumerate}
+
+The book introduces this chapter by asking four different questions and then using the question to introduce a different counting technique. The questions are:
+
+\begin{enumerate}
+    \item How many eight-character passwords are possible if each character is either an uppercase letter A-Z, a lowercase letter a-z, or a digit 0-9?
+    \item Given nine players, in how many different ways can a manager write out a batting lineup?
+    \item You play a pick-six lottery by specifying six different numbers from 1-40. How many different lottery tickets are possible?
+    \item How many different orders for a dozen donuts are possible if a store offers 30 donut varieties?
+\end{enumerate}
+
+Each of these questions is answered with a subsubsection and a new idea. The first two questions are examples of \textbf{permutations} while the second two are examples of \textbf{combinations}.
+
+\begin{itemize}
+    \item Permutation - Order matters, for example, the password ``123'' is different than ``321''. Normally this means that each permutation is a unique list.
+    \item Combinations - Order does not matter, for example, ``orange, apple, kiwi'' is the same as ``kiwi, apple, orange''. Normally this means that a combination is a set or a \textbf{multiset}, which is a set that allows multiples of the same value.
+\end{itemize}
+
+Normally the number of permutations is greater than combinations if the length of the initial set, $n$ and the length of the list or subset, $k$, are the same.
+
+\subsubsection{Question Q1: Counting lists \underline{with} repetition}
+
+Reiterate the example: 
+\begin{center}
+``How many eight-character passwords are possible if each character is either an uppercase letter A-Z, a lowercase letter a-z, or a digit 0-9?''
+\end{center} 
+The alphabet has 26 letters and the digits 0-9 are ten. This results in 62 choices for each character. Then, each character can be selected up to eight different times. The number of passwords possible is:
+\begin{equation*}
+    62 \cdot 62 \cdot 62 \cdot 62 \cdot 62 \cdot 62 \cdot 62 \cdot 62 = 62^{8} = 218,340,105,584,896
+\end{equation*}
+
+Example of a password is \texttt{V93Vvd99}. Mathematically the password could be referred to as a \textbf{list}, which would be written as \texttt{(V, 9, 3, V, v, d, 9, 9)}. A list can be referred to as \textbf{k-list}, where $k$ is the length of the list. In the example $k$ equals 8. Each element in the k-list comes from a set, called $n$. For the example
+\begin{equation*}
+n = \{A, B, C, \dots, Z, a, b, c, \dots, z, 0, 1, 2, \dots 9\}
+\end{equation*}
+
+Precisely, for a list of length $k$ generated from a set of length $n$. The number of permutations is $\mathbf{n^k}$.
+
+\subsubsection{Question Q2: Counting lists \underline{without} repetition}
+
+Reiterate the example:
+
+\begin{center}
+    ``Given nine players, in how many different ways can a manager write out a batting lineup?''
+\end{center}
+
+Each player can only be chosen once, so the first player has nine choices, the second player eight choices, the third seven and so on. This is written as:
+
+\begin{equation*}
+    9 \times 8 \times 7 \dots 1 = 9! = 362880
+\end{equation*}
+
+Now, if instead of baseball lineup, you had the following question:
+
+\begin{center}
+    ``Given nine players, how many different ways can you make a lineup of five basketball players?''
+\end{center}
+
+Assuming each player can play any position the problem begins similiar to the baseball problem, but ends differently. The first player has nine choices, the second player eight, the third player seven, the fourth six and the fifth five. This is written as:
+
+\begin{equation*}
+    9 \cdot 8 \cdot 7 \cdot 6 \cdot 5 = 15120
+\end{equation*}
+
+This formula works, but isn't convenient for quick deployments. Revisting it:
+
+\begin{equation*}
+    9 \cdot 8 \cdot 7 \cdot 6 \cdot 5 = \dfrac{9 \cdot 8 \cdot 7 \cdot 6 \cdot 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1}{4 \cdot 3 \cdot 2 \cdot 1} = \dfrac{9!}{4!} = \dfrac{9!}{(9-5)!}
+\end{equation*}
+
+Precisely, for a list of length $k$, with non-repeating values, generated from a set of length $n$. The number of permutations is:
+
+\begin{equation*}
+    (n)_{k} = \dfrac{n!}{(n-k)!}
+\end{equation*}
+
+If the list with length $k$ is the same length as the set $n$, $k = n$, the following simplification occurs.
+
+\begin{equation*}
+    (n)_{n} = \dfrac{n!}{(n-n)!} = \dfrac{n!}{0!} = \dfrac{n!}{1} = n!
+\end{equation*}
+
+\subsubsection{Question Q3: Counting sets \underline{without} repetition}
+
+Reiterate the example:
+
+\begin{center}
+``You play a pick-six lottery by specifying six different numbers from 1-40. How many different lottery tickets are possible?''
+\end{center}
+
+A pick-six lottery has the following rules:
+\begin{enumerate}
+    \item Order doesn't matter, so the lottery number $\{1, 2, 3, 4, 5, 6\}$ is the same as $\{6, 1, 5, 2, 4, 3\}$.
+    \item No repetition allowed. For example $\{1, 1, 2, 3, 4, 5\}$ is not a valid choice.
+\end{enumerate}
+
+This is similiar to counting lists without repition, with the exception that order doesn't matter. As a result, the number of combinations possible needs to be less than the number or list permutations. The solution is:
+
+\begin{equation*}
+    \binom{40}{6} = \dfrac{40!}{6!(40-6)!} = \dfrac{(40)_6}{6!}
+\end{equation*}
+
+The notation $\binom{n}{k}$ is read ``$n$ chose $k$'', stands for the number of k-subsets of an n-set.
+
+\begin{equation*}
+    \binom{n}{k} = \dfrac{(n)_k}{k!} = \dfrac{n!}{k!(n-k)!}
+\end{equation*}
+
+Where does the $k!$ come from in the denominator? The easiest way to visualize the permuations, is to start with the smallest number in the initial set $n$. Then exhaust all the potential permutations where the remaining values are all larger. Then, move to the next larger value and repeat. Keep repeating till you are at the end. The number of those values to line up is $k!$. This isn't a perfect explanation, but its good enough to stick in my brain.
+
+\subsubsection{Question Q4: Counting sets \underline{with} repetition (multisets)}
+
+Reiterate the example:
+
+\begin{center}
+    ``How many different orders for a dozen donuts are possible if a store offers 30 donut varieties?''
+\end{center}
+
+The textbook makes no symbolic distinction between a normal set (no repetition) and a multiset (has repetition). It expects you to figure it out. \medskip
+
+Making a multiset combination uses the following formula:
+
+\begin{equation*}
+    \left(\!\!\! \binom{n}{k} \!\!\!\right) = \binom{k+n-1}{k} = \dfrac{(k+n-1)!}{k!(k+n-1-k)!} = \dfrac{(k+n-1)!}{k!(n-1)!}
+\end{equation*}
+
+\subsubsection{Summary}
+
+Whether the output is the number of permutation or combination with repetition or no repetition, the inputs are the same.
+
+\begin{itemize}
+    \item $n$ - Length of the input base set
+    \item $k$ - Length of the output list or set
+\end{itemize}
+
+% how to make table rows longer, especially for equations?
+\begin{center}
+\begin{tabular}{|c|c|c|}
+    \hline
+    & \textbf{Permutations} & \textbf{Combinations} \\
+    & Order Matters & Order Doesn't Matter \\
+    & Lists & Sets or Multisets \\
+    \hline
+    Repetition & $n^{k} = \underbrace{n \cdot n \cdot n \dots n}_{k-times}$ & $ \left(\!\!\! \dbinom{n}{k} \!\!\!\right) = \dfrac{(k+n-1)!}{k!(n-1)!} $ \\
+    \hline
+    No Repetition & $(n)_{k} = \dfrac{n!}{(n-k)!}$ & $\dbinom{n}{k} = \dfrac{n!}{k!(n-k)!}$ \\
+    \hline
+\end{tabular}
+\end{center}
+
+Some example styles of questions from each category are the following:
+
+\begin{itemize}
+    \item \textbf{Permutation with repetition} - How many $k$ length \underline{lists} can be made from a $n$ length set. The values inside the list \underline{can} repeat themselves.
+    \item \textbf{Permutation without repetition} - How many $k$ length \underline{lists} can be made from a $n$ length set. The values inside the list \underline{cannot} repeat themselves.
+    \item \textbf{Combination with repetition} - How many $k$ length \underline{multisets} can be made from a $n$ length set. The values inside the multiset \underline{can} repeat themselves.
+    \item \textbf{Combination without repetition} - How many $k$ length \underline{subsets} can be made from a $n$ length set. The values inside the subset \underline{cannot} repeat themselves.
+\end{itemize}
+
+For reference, a list is a collection of characters (letters, numbers, etc.) where order matters. A set (subset or multiset) is a collection of characters where order doesn't matter.\medskip
+
+Finally, here are some terrible mnemonics to remember the differences between permutations and combinations.
+
+\begin{itemize}
+    \item Permutation - If you get a perm, you probably are a control freak who likes order and making lists of things to do. Imagine a Karen walking out from the hair salon with a perm.
+    \item Combinations - If all you do is comb your hair in the morning. You don't care about order and think you're all set in life. Think of a surfer bro living in his van, not a care in the world.
+    \item Unfortunately, there are way more Karen's in the world than chill surfer bros. (EG, permutations tend to be bigger than combinations).
+\end{itemize}
+
+\subsection{Product and Summation Principles}
+
+The book introduces the definition of the product principle in support of looking at lists with repetition allowed. It is a bit of a boring definition that doesn't feel very insightful. Later a few examples with the product principle are shown that are more interesting. We will begin with the boring definition before progressing to why it is important.
+
+\subsubsection{Product Principle}
+
+\textbf{Definition:} For counting a k length list (k-list) of the form $(\ell_1, \ell_2, \dots, \ell_k)$ if their are $c_1$ ways to specify element $\ell_1$ and each specification leads to a different k-list; and for every other list element $\ell_i$ there are $c_i$ ways to specify that element no matter specification of the previous elements $\ell_1, \ell_2, \dots, \ell_{i-1}$ and each such specification of $\ell_i$ leads to a a different k-list. Then there are $c_1 \times c_2 \times \dots \times c_k$ different lists. \medskip
+
+The book uses the example of counting the number of 3 character passwords generated from the set $\{A, B, g\}$. The elements can be repeated. Therefore each element $(\ell_1, \ell_2, \ell_3)$ can be specificed 3 different ways. As such, $c_1 = c_2 = c_3 = 3$. The number of lists is $3 \times 3 \times 3 = 9$. \medskip
+
+A more interesting example is found on page 16. Which deals with a list of ternary numbers. A ternary number has three options for each digit, which are $\{0, 1, 2\}$. The question asks ``For an eight length list (8-list) of ternary numbers how many ways can you specify it with four 1's?'' This problem has two parts and the product principle is used to join the parts together.
+
+\begin{enumerate}
+    \item How many ways can you specify an 8-list with four spots taken and the other spots free?
+    \begin{itemize}
+        \item Combination with 8 free positions and four chosen. The answer is $\dbinom{8}{4}$.
+    \end{itemize}
+    \item With the remaining free spots, how many ways can you fill it with two different options $\{0, 2\}$?
+    \begin{itemize}
+        \item Four spots are free which can be filled with two different options. Those remaining positions have $2^4$ options for definition.
+    \end{itemize}
+\end{enumerate}
+
+Combining two pieces, the answer is $\dbinom{8}{4} \cdot 2^{4}$. This is a natural progression from the ``boring'' definition. Visualize a tree, first placing the ``1'' positions and next placing the ``0'' or ``2'' position.
+
+\subsubsection{Summation Principle}
+
+\textbf{Definition}: Suppose the objects in a counting question can be divided into $k$ disjoint and exhaustive cases. If there are $n_j$ objects in the $j^{th}$ case, for $j=1, 2, \dots, k$ then there are $n_1 + n_2 + \cdots + n_{k}$ objects in total. \medskip
+
+The example in the book is:
+
+\begin{center}
+    ``An exam has 20 multiple choice questions of $\{A, B, C, D\}$. How many ways score at least 70\%?''
+\end{center}
+
+This example is broken into a few pieces before being added back together. To score a 70\% requires answering 14 problems correctly and 6 problems incorrectly. The product principle breaks this into combinations of the 14 correct answers, $\binom{20}{14}$ and then permutations of the 3 incorrect choices for six of the problems, $3^{6}$.
+\begin{equation*}
+    \dbinom{20}{14} \cdot 3^6
+\end{equation*}
+
+This only answers the number of ways to score just a 70\% and does not include the tests that scored greater than 70\%. This requires including tests that scored 15, 16, 17, 18, 19 and 20 questions correctly. Writing it out is:
+\begin{equation*}
+    \dbinom{20}{14} \cdot 3^6 + \dbinom{20}{15} \cdot 3^5 + \dbinom{20}{16} \cdot 3^4 + \dbinom{20}{17} \cdot 3^3 +
+    \dbinom{20}{18} \cdot 3^2 + \dbinom{20}{19} \cdot 3^1 + \dbinom{20}{20} \cdot 3^0
+\end{equation*}
+
+Using summation notation to represent the total answer:
+\begin{equation*}
+    \sum_{k=14}^{20} \binom{20}{k} 3^{20-k}
+\end{equation*}
+
+\subsubsection{Counting the Complement}
+Sometimes it will be easier to find the complement of a problem and subtract that from the total possibilities. An example question is:
+
+\begin{center}
+    ``How many subsets of [15] have at least two elements?''
+\end{center}
+
+As a refresh, $[15] = \{1, 2, 3, 4, 5, \dots, 15\}$. One way would be to count how many subsets have 3, then 4, then 5 and so on elements. But a simplier way, it to calculate the total amount of combinations and subtract how many have 0 and 1 element.
+
+\begin{equation*}
+    2^{15} - \dbinom{15}{0} - \dbinom{15}{1} = 32,752
+\end{equation*}
+
+This is referred to as counting the complement, and is common in problems of the form ``least one'', or ``least two'' or ``nonempty''.
+
+\subsection{Functions and the bijection principle}
+
+Bijections are useful because they provide an opportunity to count things that might be easier than the original problem. For example, its commonly easier to visualize power sets of numbers as binary representations and count those. A method is needed to prove something is actually a bijection first.
+
+\subsubsection{Relations and Functions}
+
+To define a relation and a function, a cartesian product between two sets is needed. For sets $A$ and $B$ the \textbf{Cartesian product} is the sets of $A \times B$ given by
+\begin{equation*}
+    A \times B = \{(a,b): a \in A \text{ and } b \in B\}
+\end{equation*}
+
+The items inside a Cartesian product are lists, as such the order of them matters. A \textbf{relation} from $A$ to $B$ is subset of $A \times B$. A relation on $A$ is a subset of $A \times A$. A relation doesn't need much structure, just that it is a subset of the cartesian product.\medskip
+
+Likewise a \textbf{function} from $A$ to $B$ is a relation $f$ from $A$ to $B$ that satisfies the following property: for each $a \in A$, there is exactly one $b \in B$ such that $(a,b) \in f$. Writing $f: A \rightarrow B$ indicates that $f$ is a function from $A$ to $B$. Writing $f(a) = b$ means $(a,b) \in f$.\medskip
+
+This means for a function, that a singular value of $a \in A$ only goes to one $b \in B$. It doesn't say anything about how many different values for $a \in A$ could go to the same $b \in B$. This means, a valid function ordered pair is $(a_1, b)$ and $(a_2, b)$. An example of this would be $f(a) = a^2$. Where $(2, 4)$ and $(-2, 4)$ both meet the function definition.
+
+\subsubsection{Domain, codomain, and range}
+
+Given a function $f: A \rightarrow B$
+
+\begin{itemize}
+    \item \textbf{Domain} - The ``space'' of $A$
+    \item \textbf{Codomain} - The ``space'' of $B$
+    \item \textbf{Range} - The possible values inside $B$ given the actual values for $A$. A subset of the codomain that is dependent on values used inside $A$.
+\end{itemize}
+
+\subsubsection{One-to-one, onto and bijective functions}
+
+Given a function $f: A \rightarrow B$ the function is
+
+\begin{itemize}
+    \item \textbf{One-to-one}, \textit{(injective)}, if for $a_1, a_2 \in A$, if $f(a_1) = f(a_2)$ then $a_1 = a_2$. An alternative definition is for $a_1, a_2 \in A$, if $f(a_1) \neq f(a_2)$ then $a_1 \neq a_2$. This is important, because it solidifies for each $b \in B$ there is a unique $a \in A$. Basically different values inside $A$ won't go to the same value inside $B$.
+    \item \textbf{Onto}, \textit{(surjective)}, for each $b \in B$ there exists an $a \in A$ where $f(a) = b$. Basically there aren't any ``stranded'' values inside $B$ where there is no way to get to them from $A$. You can reach all the points in $B$ using $A$.
+    \item \textbf{Bijection} is a function that is both one-to-one and onto.
+\end{itemize}
+
+This all culminates in the \textbf{bijection principle} which is \textit{Two finite sets $A$ and $B$ have the same size if and only if there exists a bijection from one set to ther other}.
+
+\subsubsection{Inverse relation, inverse function}
+
+To obtain the inverse of a relation, just switch the order of the elements in each ordered pair. If $R$ is a relation from $A$ to $B$, then the \textbf{inverse} of $R$ is that relation $R^{-1}$ from $B$ to $A$ given by
+\begin{equation*}
+    R^{-1} = \{(b,a): (a,b) \in R \}
+\end{equation*}
+
+Sincy every function is a relation, then the \textbf{inverse of a function} does not need a separate defintion. The problem is this...\textit{the inverse of a function need not be a function}!\medskip
+
+This can happen where a function, $f$ would have the ordered pair $(-2,4)$ and $(2,4)$. If you took the inverse of that function you would end up with $(4, -2)$ and $(4, 2)$, which violates the definition of a function. So the inverse of $f$ would be a relation, not a function.
+
+\subsection{Relations and Equivalence Principle}
+The equivalence principle applies to combinatorial problems that exhibit certain symmetries. This helps with counting problems, such as the number of ways to seat people around a ciruclar table, or how to pair people together.
+
+\subsubsection{Equivalence Relation}
+
+\begin{itemize}
+    \item \textbf{Equivalence Relation} - A relation $\veps$ on a set $A$ is an \textbf{equivalence relation} on $A$ provided that $\veps$ has the following three properties
+    \begin{itemize}
+        \item \textbf{Reflexive}: For each $a \in A, (a, a) \in \veps$
+        \item \textbf{Symmetric}: For each $a, b \in A$, if $(a,b) \in \veps$ then $(b,a) \in \veps$.
+        \item \textbf{Transitive}: For each $a,b,c \in A$, if $(a,b) \in \veps$ and $(b,c) \in \veps$, then $(a,c) \in \veps$.
+    \end{itemize}
+\end{itemize}
+
+An equivalence relation is abstracting the properties we naturally see in equality (=). It is customary to write $a \veps b$ to mean $(a,b) \in \veps$. Just think of instead of $\veps$ it was $=$, so $a \veps b$ and $a = b$ would be similiar. For any set $A$, the \textbf{identity relation} on $A$ is the relation
+
+\begin{equation*}
+    \mathcal{I}_{A} := \{(a,a): a \in A\}
+\end{equation*}
+
+\subsubsection{Equivalence Class}
+
+Given an equivalence relation on a set $A$ and any $a \in A$, the equivalence class containing $a$ is the set of all elements of $A$ that are related to $a$.
+
+\begin{itemize}
+    \item \textbf{Equivalence class} - Let $\veps$ be an equivalence relation on a set $A$. For any $a \in A$, the \textbf{equivalence class} containing $a$ is that set
+    \begin{equation*}
+        \veps (a) := \{x \in A : (a,x) \in \veps\}
+    \end{equation*}
+\end{itemize}
+
+An example of this is congruence modulo 3 relation on the integers, then the equivalence class containing the integer $0$ is the set of all integers whose remainder is $0$ when divided by $3$, i.e., multiples of $3$:
+
+\begin{equation*}
+    \veps (0) = \{ \dots, -9, -6, -3, 0, 3, 6, 9, \dots \}
+\end{equation*}
+
+If two elements are related by an equivalence relation, then their equivalence classes are equal.
+
+\begin{thm}
+    If $\veps$ is an equivalence relation on a set $A$ and $(a,b) \in \veps$, then $\veps (a) = \veps (b)$.
+\end{thm}
+
+\subsubsection{Partitions}
+
+For any set $S$, a \textbf{partition} of $S$ is a set of nonempty, disjoint subsets of $S$ whose untion is $S$. For examples if $S = [6]$ then 3 possible partitions are:
+
+\begin{align*}
+    P_1 &= \{\{1, 6\}, \{2\}, \{3, 4, 5\}\} \\
+    P_2 &= \{\{1, 2, 3, 4, 5, 6\}\} \\
+    P_3 &= \{\{1\}, \{2\}, \{3\}, \{4, 5\}, \{6\}\} \\
+\end{align*}
+
+The elements of a partition are called the \textbf{blocks}. So $P_1$ has three blocks, $P_2$ has one block and $P_3$ has five blocks.
+
+\subsubsection{Equivalence relations and partitions}
+Equivalence relations and partitions are intimately related: there is a natural bijection between the two.
+
+THe following theorem shows how an equivalence relations will induce a partition.
+
+\begin{thm}
+If $\veps$ is an equivalence relation on a set $A$ then the set
+\begin{equation*}
+    P := \{\veps (a) : a \in A \}
+\end{equation*}
+of eqvivalence classes of $\veps$ is a partition of $A$.
+\end{thm}
+
+This theorem shows how a partition will induce an equivalence relation.
+
+\begin{thm}
+If $P$ is a partition of a set $A$, then the relation $R$ on $A$ defined by
+\begin{equation*}
+    R := \{(a,b) \in A \times A: a \text{ is in the same block of P as is b}
+\end{equation*}
+is an equivalence relation on $A$.
+\end{thm}
+
+There is a final theorem that ties it all together with:
+
+\begin{thm}
+If $A$ is a finite set, then the number of possible equivalence relations on $A$ equals the number of possible partitions of $A$.
+\end{thm}
+
+\subsubsection{Equivalence Principle}
+The book has an example discussing how many ways you can seat a table of 4 people. You need to assume that the seating is independent of rotation. So the following lists are equivalent.
+
+\begin{equation*}
+    (3, 4, 2, 1) \equiv (4, 2, 1, 3) \equiv (2, 1, 3, 4) \equiv (1, 3, 4, 2)
+\end{equation*}
+
+Looking at the straight number of permutations of 4 people, there are $4! = 24$. Unfortunately, this would be an over estimate. Each list has 3 other equivalence relations, or a equivalence class of size 4. So the actual number of permutations is $4!/4 = 24/4 = 6$.
+
+\begin{thm}
+\textbf{Equivalence Principle} Let $\veps$ be an equivalence relation on a finite set $A$. If every equivalence class of $\veps$ has size $C$, where $C$ is a positive integer, then $\veps$ has $\dfrac{|A|}{C}$ equivalence classes.
+\end{thm}
+
+\subsection{Existance and the Pigeonhole Principle}
+The final section of the chapter will pivot to discuss existance rather than continuing with enemeration.
+
+\begin{thm}
+\textbf{Basic Pigeonhole Principle} If more than $n$ objects are distributed among $n$ boxes, then some box must contain at least two objects.
+\end{thm}
+
+You have to fill up all the boxes. The functional version of pigeonhole is:
+
+\begin{thm}
+\textbf{Basic Pigeonhole Principle, Function Version} If $A$ and $B$ are finite, non-empty sets with $|A| > |B|$, then no function $A \rightarrow B$ can be one-to-one.
+\end{thm}
+
+Again, this is saying that some of the values in $A$ will have to go to multiple values in $B$.
+
+\subsubsection{How many objects in each box?}
+
+The next theorems deal with the number of objects that are in each box. The example function maps from $[10]$ to $[3]$. So you are fitting $10$ objects into $3$ boxes. You can't force a box to have any objects inside it. But you can say, at least one of the boxes will have at least $10/3$ objects inside, or $4$. The book informally introduces the term \textbf{image} here. It considers the function
+
+\begin{equation*}
+    f = \{(1,2), (2,1), (3,2), (4,2), (5,3), (6,1), (7,3), (8,3), (9,2), (10,2)\}
+\end{equation*}
+
+If we compute the inverse \textbf{images} of each $b \in [3]$, we see that
+\begin{align*}
+    f^{-1}(1) & = \{2, 6\} \\
+    f^{-1}(2) & = \{1, 3, 4, 9, 10\} \\
+    f^{-1}(3) & = \{5, 7, 8\}
+\end{align*}
+
+The proof book by Hammack has a good definition. Suppose $f: A \rightarrow B$ is a function.
+\begin{enumerate}
+    \item If $X \subseteq A$, the \textbf{image} of $X$ is the set $f(X) = \{f(x): x \in X\} \subseteq B$.
+    \item If $Y \subseteq B$, the \textbf{preimage} of $Y$ is the set $f^{-1}(Y) = f^{-1}(Y) = \{x \in A: f(x) \in Y\} \subseteq A$.
+\end{enumerate}
+
+In lay terms. The image of $X$ is the subset of $B$ values that $X$ maps too. So in our example, the image of [10] would be [3]. The preimage of $Y$ is the subset of $A$ values that $Y$ maps too. The preimage of [3] is [10]. In reality, the example is computing the images of the inverse of the function. I really think they just found the preimage... \\
+
+Back to the combinatorics. From the example, it is obvious that one of preimages will have size at least as big as $10/3$. Mathematically this is stated as.
+
+\begin{thm}
+\textbf{Pigeonhole Principle Size} If $A$ and $B$ are finite, nonempty sets and $f: A \rightarrow B$ is a function, then there exists some element of $B$ that is the image of at least $\dfrac{|A|}{|B|}$ elements of $A$.
+\end{thm}
+
+\subsubsection{k-to-one functions}
+Remember that a function is one-to-one provided that each element of its codomain is the image of at most one element of its domain. A function is two-to-one provide that each elements of its codomain is the image of at most two elements of its domain. If we remember, the definition of a function, is the input to a function can only map to one output. The definition does not prevent multiple input values mapping to the same output value. The previous example is still a function, each element in $[10]$ only maps to one value in $[3]$. The example is a five-to-one function. Since five values in $[10]$ all map to the same value in $[3]$.
+\medskip
+
+\textbf{k-to-one}: A function is k-to-one provided that each element of its codomain is the image of at most k elements of the domain.
+\medskip
+
+Remember, the \textbf{domain} are the possible input values for $f$. The \textbf{codomain} is the set $B$ while the \textbf{range} are all the possible output values. The range is a subset of the codomain. Again, I think I disagree with the previous definition, should it say range instead of codomain? Anyway, the $k$ is the input, so $k$ values in the domain (input) map to one value in the codomain (range?) (output).
+
+\begin{thm}
+\textbf{Pigeonhole Principle, k-to-one}: If $A$ and $B$ are finite, nonempty sets, then no function $A \rightarrow B$ can be k-to-one for any value of $k$ smaller than $\dfrac{|A|}{|B|}$.
+\end{thm}
+
+\subsubsection{Erdos-Szekeres Theorem}
+
+The Erdos-Szekeres theorem (EST) is responsible for proving that a sequence of numbers will have a certain size subset that are increasing in size or decreasing in size. It is proved by looking at the sequence and counting the longest increasing sequence (LIS) for each number. You can then say if no value continually increases for the required amount, it will decrease. The formal statement is:
+
+\begin{thm}
+\textbf{Erdos-Szekeres}: For $n \geq 1$, if $S$ is a sequence of $n^{2}+1$ distinct real numbers, then $S$ contains either an increasing subsequence of length $n+1$ or a decreasing subsequence of length $n+1$. Furthermore, this result is best possible in the sense that $n^2+1$ cannot be replaced by $n^2$.
+\end{thm}
+
+\end{document}
+

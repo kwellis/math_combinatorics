@@ -1,0 +1,232 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+\usepackage{graphicx}
+\usepackage{minted}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{problem}{Problem}
+
+% shortcuts for blackboard bold number sets (reals, integers, etc.)
+\newcommand{\QQ}{\ensuremath{\mathbb Q}}
+\newcommand{\RR}{\ensuremath{\mathbb R}}
+\newcommand{\NN}{\ensuremath{\mathbb N}}
+\newcommand{\ZZ}{\ensuremath{\mathbb Z}}
+
+% Make header with name and date etc.
+\usepackage{fancyhdr}
+\lhead{Kaelin Ellis\\Math 320: Combinatorics}
+\rhead{\today\\Assignment 3}
+\pagestyle{fancy}
+
+\usepackage[utf8]{inputenc}
+\setlength{\parindent}{0pt} % Don't indent new paragraphs
+\setlength{\headheight}{24pt}
+
+\begin{document}
+
+\section{Chapter 1.4}
+\setcounter{problem}{4}
+\begin{problem} % Problem 5
+Fill in the blank and then prove the statement: An equivalence relation on $A$ is a function $A \rightarrow A$ if and only if (blank).
+\end{problem}
+
+\textbf{Answer:}
+I initially said ``it is the equal relation'', but I later read the book which said ``identity relation''.
+
+\begin{thm}
+An equivalence relation on $A$ is a function $A \rightarrow A$ if and only if it is the identity relation.
+\end{thm}
+\begin{proof}
+    \textit{Forward:} Suppose $R$ is an an equivalence relation on $A$ that is a function $A \rightarrow A$. We show that $R = (a,a): a \in A$. \\
+    Since $R$ is an equivalence relation it is reflexive and for each $a \in A$ then $(a,a) \in R$.\\
+    As $R$ is a function for each $a \in A$ implies one $b \in A$ where $(a,b) \in R$.\\
+    For $R$ to be reflexive and a function then $b = a$ and for each $a \in A$ only $(a,a) \in R$.\\
+    \textit{Backward:} Suppose $R$ is the identity relation $R := \{(a,a):a \in A\}$. We show $R$ is a function and equivalence relation.\\
+    For each $a \in A$ there is $(a, a) \in R$ so $a \in A$ goes to exactly one $b \in A$ where $b = a$.\\
+    Since $(a,a) \in R$ for each $a \in A$ it is reflexive.\\
+    Take $b = a$, then for each $a, b \in A$ if $(a, b) \in R$ then $(b, a) \in R$, so it is symmetric.\\
+    Take $c = b = a$, then for each $a, b, c \in A$ if $(a, b) \in R$ and $(b, c) \in R$ then $(a, c) \in R$.\\
+    Thus the identity relation is a function and an equivalence relation.
+\end{proof}
+
+\begin{problem} % Problem 6
+Let $f: A \rightarrow B$. Define a relation $\equiv$ on $A$ by $a_1 \equiv a_2$ if and only if $f(a_1) = f(a_2)$. Give a quick proof that this is an equivalence relation. What are the equivalence classes? Explain intuitively.
+\end{problem}
+
+\begin{thm}
+Let $f: A \rightarrow B$. The following relation $\equiv$ on $A$ by $a_1 \equiv a_2$ if and only if $f(a_1) = f(a_2)$ is an equivalence relation.
+\end{thm}
+\begin{proof}
+    Suppose $f: A \rightarrow B$ and $R: A \rightarrow B$ is the relation that $a_1 R a_2$ if and only if $f(a_1) = f(a_2)$. We will show this is an equivalence relation.\\
+    Reflexive: For any $a \in A$, $f(a) = f(a)$ so $(a, a) \in R$. \\
+    Symmetric: If $(a, b) \in R$ then $f(a) = f(b)$ so $f(b) = f(a)$ thus $(b, a) \in R$. \\
+    Transitive: If $(a, b) \in R$ and $(b, c) \in R$ then $f(a) = f(b)$ and $f(b) = f(c)$. \\
+    As such $f(a) = f(c)$ which implies $(a, c) \in R$.
+\end{proof}
+
+\textbf{Answer:}
+The equivalence classes are everything with the same absolute value?
+
+\begin{problem} % Problem 7
+Solve the circular seating arrangements problem for four people, but with two seatings considered equivalent provided that each person has the same set of neighbors. (I.e., we don't distinguish between left- and right- neighbors.)
+\end{problem}
+
+\textbf{Answer:}
+In the book the following lists were considered equal.
+
+\begin{equation*}
+    (1,2,3,4) = (2,3,4,1) = (3,4,1,2) = (4,1,2,3)
+\end{equation*}
+
+Now, we need to deal with lists being equivalent if the partners on either side are the same. For the first list, this appears as:
+
+\begin{equation*}
+    (1,2,3,4) = (3,2,1,4)
+\end{equation*}
+
+As such, the size of the equivalence class has increased from 4 to 8. The answer is:
+
+\begin{equation*}
+    \frac{4!}{8} = \frac{24}{8} = 3
+\end{equation*}
+
+\pagebreak
+\setcounter{problem}{10}
+\begin{problem} % Problem 11
+How many partitions of $[n]$ are there:
+\begin{enumerate}[(a)]
+    \item Into two blocks?
+    \item Into $n-1$ blocks?
+\end{enumerate}
+\end{problem}
+
+\textbf{Answer:} This problem will be answered by the two parts.
+\begin{enumerate}[(a)]
+    \item Any set for $[n]$ can be represented as a binary number where $b = b_1, b_2, \dots b_n$, with $b_i = \{0, 1\}$. The binary digits are used to represent whether the digit is in the first set $\{0\}$ or the second set $\{1\}$. There are $2^{n} - 2$ ways to break up the binary number into the two sets, substracting the empty set and the full set. Only half of the combinations are needed, since when looking at the sets, the number $1010$ is the same as $0101$ for a four digit. As such, the answer is:
+    \begin{equation*}
+        \frac{2^n - 2}{2} = 2^{n}2^{-1} - 1 = 2^{n-1} - 1
+    \end{equation*}
+    \item An example enumeration will be completed for the partitions of $[5] = \{1, 2, 3, 4, 5, \}$. So you will have five elements with four blocks.
+    \begin{center}
+        \begin{tabular}{c|c|c|c}
+        Double & Single & Single & Single \\
+        \hline
+        $\{1,2\}$ & \{3\} & \{4\} & \{5\} \\
+        $\{1,3\}$ & \{2\} & \{4\} & \{5\} \\
+        $\{1,4\}$ & \{2\} & \{3\} & \{5\} \\
+        $\{1,5\}$ & \{2\} & \{3\} & \{4\} \\
+        $\{2,3\}$ & \{4\} & \{5\} & \{1\} \\
+        $\{2,4\}$ & \{3\} & \{5\} & \{1\} \\
+        $\{2,5\}$ & \{3\} & \{4\} & \{1\} \\
+        $\{3,4\}$ & \{5\} & \{1\} & \{2\} \\
+        $\{3,5\}$ & \{4\} & \{1\} & \{2\} \\
+        $\{4,5\}$ & \{1\} & \{2\} & \{3\}
+        \end{tabular}
+    \end{center}
+    This pattern continues for all numbers. Where you have one set with 2 elements and the rest of the sets are single elements. As such, you can purely focus on the amount of two digit combinations, which is of the form ``Given $n$ pick 2''. Or $\dbinom{n}{2}$.
+\end{enumerate}
+
+\setcounter{problem}{14}
+\begin{problem} % Problem 15
+How many different necklaces can we make from $n$ beads of different colors? Consider two necklaces the same if (like in a circular arrangement) one can be obtained from the other via rotation or if (unlike in a circular arrangement) one can be obtained from the other via flipping the necklace over.
+\end{problem}
+
+\textbf{Answer:}
+I'll show one of the equivalence classes with a $[4]$ case.
+\begin{align*}
+    (1, 2, 3, 4) = (2, 3, 4, 1) &= (3, 4, 1, 2) = (4, 1, 2, 3) \\
+    (4, 3, 2, 1) = (1, 4, 3, 2) &= (2, 1, 4, 3) = (3, 2, 1, 4)
+\end{align*}
+
+All of the lists above are considered equivalent in the problem. The size of the equivalent class is $2n$. The number of raw lists is $n!$. The number of unique necklaces is $\dfrac{n!}{2n} = \dfrac{(n-1)!}{2}$. The answer is valid for $n > 2$.
+
+\section{Chapter 1.5}
+\setcounter{problem}{0}
+\begin{problem} %problem 1
+    A bag contains 97 pennies, 56 nickels, 410 dimes, 102 quarters, and three half-dollars. You reach in and grab some coins. What is the fewest number of coins you must grab in order to guarantee that you have two coins of the same value in your hand?
+\end{problem}
+
+\textbf{Answer:}
+There are five unique types of coins. As such, you must grab at least six coins to get two coins of the same type.
+
+\begin{problem} %problem 2
+    Let $n$ be odd and suppose $(x_1, x_2, \dots , x_n)$ is any permutation of $[n]$. Prove that the product $(x_1 - 1)(x_2 - 2) \dots (x_n - n)$ is even. Is the result necessarily true if $n$ is even? Give a proof or counterexample.
+\end{problem}
+
+This proof requires three lemma's for support, written below.
+
+\begin{lem}\label{lem:sub_even}
+Subtracting two numbers with equal parity results in an even number.
+\end{lem}
+
+\begin{proof}
+\textbf{Case 1:} Assume two numbers are even, such that $x_1 = 2a$ and $x_2 = 2b$ where $a, b \in \ZZ$. As such $x_1 - x_2 = 2a - 2b = 2(a-b)$ where $a-b \in \ZZ$ which is even.\\
+\textbf{Case 2:} Assume two numbers are odd, such that $x_1 = 2a+1$ and $x_2 = 2b + 1$ where $a, b \in \ZZ$. As such $x_1 - x_2 = (2a + 1) - (2b + 1) = 2a - 2b = 2(a-b)$ where $a-b \in \ZZ$ which is even.\\
+As such, subtracting two numbers with equal parity results in an even number.
+\end{proof}
+
+\begin{lem}\label{lem:sub_odd}
+The difference, $a - b$, of two numbers will be odd if and only if the two numbers have different parity.
+\end{lem}
+
+\begin{proof}
+Assume two numbers, $x_1, x_2$ have opposite parity, so $x_1 = 2a+1$ and $x_2 = 2b$ where $a, b \in \ZZ$. So $x_1 - x_2 = 2a+1 - 2b = 2a - 2b + 1 = 2(a-b)+1$. Since $a-b \in \ZZ$ the difference is odd.
+\end{proof}
+
+\begin{lem}\label{lem:prod_odd}
+Multiplying two odd numbers results in an odd number.
+\end{lem}
+\begin{proof}
+Assume two numbers, $x_1, x_2$ are odd, so $x_1 = 2a+1$ and $x_2 = 2b+1$. The product of the numbers is $x_1 \times x_2 = (2a+1)(2b+1) = 4ab + 2a + 2b + 1 = 2(2ab+a+b) + 1$ where $2ab+a+b \in \ZZ$. As such the product is odd.
+\end{proof}
+
+\begin{thm}
+Let $n$ be odd and suppose $(x_1, x_2, \dots , x_n)$ is any permutation of $[n]$. Prove that the product $(x_1 - 1)(x_2 - 2) \dots (x_n - n)$ is even.
+\end{thm}
+
+\begin{proof}
+For contradiction we take $n$ as odd and $(x_1, x_2, \dots , x_n)$ as any permutation of $[n]$. Assume the product $(x_1 - 1)(x_2 - 2) \dots (x_n - n)$ is odd. Since the product is odd, by lemma \ref{lem:prod_odd} all the values inside parathesis must be odd. For all the values inside parathesis to be odd, by lemma \ref{lem:sub_odd}, the two numbers must have different parity. For the two numbers to have different parity there must be the an equal number of odd and even numbers. For there to be an equal number of odd and even numbers, $n$ is even. Since $n$ is odd a contradiction has occured. Thus the product is even.
+\end{proof}
+
+\begin{thm}
+\textbf{Prove or disprove:} Let $n$ be even and suppose $(x_1, x_2, \dots , x_n)$ is any permutation of $[n]$. Prove that the product $(x_1 - 1)(x_2 - 2) \dots (x_n - n)$ is even.
+\end{thm}
+
+\begin{proof}
+A disproof by counterexample will occur. Suppose $n = 2$ so the product is $(2-1)(1-2) = 1 \cdot -1 = -1$ which is odd.
+\end{proof}
+
+\setcounter{problem}{3}
+\begin{problem} %problem 4
+    Let $n \ge 1$, and let $S$ be an $(n+1)$-subset of $[2n]$. Prove that there exist two numbers in $S$ such that one divides the other.
+\end{problem}
+
+\begin{proof}
+    Rawr
+\end{proof}
+
+\setcounter{problem}{7}
+\begin{problem} %problem 8
+    This concerns a more general version of the Erdos-Szekeres theorem.
+    \begin{enumerate}[(a)]
+        \item Prove: For $m,n \ge 1$ if $S$ is a sequence of $mn+1$ distinct real numbers, then $S$ contains either an increasing subsequence of length $m+1$ or a decreasing subsequence of length $n+1$.
+        \item Prove that this result is best possible by showing that the result doesn't necessarily hold when $mn+1$ is replaced by $mn$.
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+    Rawr
+\end{proof}
+
+\end{document}
+
