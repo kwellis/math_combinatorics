@@ -224,7 +224,9 @@ A disproof by counterexample will occur. Suppose $n = 2$ so the product is $(2-1
     \end{enumerate}
 \end{problem}
 
-\begin{proof}
+\textbf{Answers:}
+\begin{enumerate}[(a)]
+    \item \begin{proof}
     Assume $S$ is a sequence of $mn+1$ distinct real numbers where $m,n \ge 1$. To each number $x$ in $S$ associate the value LIS($x$) which gives the length of the longest increasing subsequence starting with, and including, $x$. 
     
     \medskip
@@ -235,8 +237,30 @@ A disproof by counterexample will occur. Suppose $n = 2$ so the product is $(2-1
     \begin{equation*}
         \ceil{\dfrac{mn+1}{m}} = \ceil{n+\dfrac{1}{m}} = n+1
     \end{equation*}
-    sequence elements.
+    sequence elements. (Kaelin translation: \textit{By the pigeonhole principle, at least $n+1$ elements from the $mn+1$ sequence will map to the same element of $[m]$}.)
+
+    \medskip
+    All the elements of $x \in S$ with that same LIS$(x)$ value will create a decreasing sequence, which is at least $n+1$ long. Seen as $x_1 > x_2 > \dots > x_{n+1}$. To see why, a proof by contradiction will be conducted. Assume that $x_1, x_2$ have the same LIS$(x)$ value and $x_1 < x_2$. Take LIS$(x_2) = y$ where $y \in \NN$. If $x_1 < x_2$ then by defintion LIS$(x_1) = y + 1$. Which means $y = y + 1$ or $0 = 1$ which is a contradiction. As such, elements with the same LIS must form a decreasing sequence.
+    \end{proof}
+
+    \item \begin{proof}
+    Assume S is a  sequence of $mn$ distinct real numbers where $m,n \ge 1$. To each number $x$ in $S$ associate the value LIS($x$) which gives the length of the longest increasing subsequence starting with, and including, $x$. 
+    
+    \medskip
+    If LIS$(x) \ge m + 1$ for some element $x$, then we have found an increasing subsequence of length $m + 1$. 
+    
+    \medskip
+    If not, then LIS$(x) \le m$ for all elements $x$ in $S$. As such $1 \le LIS(x) \le m$. The LIS function maps the sequence to the set $[m]$. We have $mn$ elements that map into $m$ bins. By the pigeonhole principle, some element of $[m]$ is the image of at least
+    \begin{equation*}
+        \ceil{\dfrac{mn}{m}} = \ceil{n} = n
+    \end{equation*}
+    sequence elements. As seen, if the number of elements is $mn$ the best decreasing sequence that can be guaranteed is $n$ long.
 \end{proof}
+\end{enumerate}
+
+
+
+
 
 \end{document}
 
