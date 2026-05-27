@@ -70,10 +70,13 @@ What this is saying, is the number of possible relations between two sets will a
 Suppose that $k, n \ge 1$ and $K,N$ are sets of the first postive integers $k,n$ denoted as $K = [k]$ and $N = [n]$. Then the set of all possible relations between $K$ and $N$ is the powerset of $K \times N$, denoted as $\mathscr{P}(K \times N)$. The cardinality of the powerset is $|\mathscr{P}(K \times N)| = 2^{kn}$, or the number of possible relations.
 
 \medskip
-For a relation to be considered a function, every value in the domain must map to only one value in the codomain. The function $f: K \rightarrow N$ has $n^k$ possible variations. The function variations is a subset of the relation variations, written $f \subseteq \mathscr{P}(K \times N)$. As such, $n^k \le 2^{nk}$. This inequality can be written $n^k < 2^{nk}$ by recognizing the empty set is inside the powerset but will never be considered to meet the definition of a function.
+For a relation to be considered a function, every value in the domain must map to only one value in the codomain. The function $f: K \rightarrow N$ has $n^k$ possible variations. The set of all function variations is a subset of all the relation variations. As such, $n^k \le 2^{nk}$. 
 
 \medskip
-WLOG: Repeat the functional arguement for $f: N \rightarrow K$ with $k^n$ possible variations. This proves that $2^{kn} > \max \{n^k, k^n\}$.
+The inequality can be written $n^k < 2^{nk}$ by recognizing the empty set is inside the powerset but will never be considered to meet the definition of a function.
+
+\medskip
+Now reversing the roles of $K$ and $N$ with the function $f: N \rightarrow K$ which has $k^n$ possible variations. The same argument from above is used to prove $k^n < 2^{nk}$. This proves that $2^{kn} > \max \{n^k, k^n\}$.
 \end{proof}
 
 \section{Chapter 2.2}
