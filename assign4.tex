@@ -10,7 +10,8 @@
 \begin{problem} % Problem 4
 Consider the possible functions $f: [7] \rightarrow [9]$
 \begin{enumerate}[(a)]
-    \item How many have $f(3) = 8$? How many have $f(3) \neq 8$?
+    \item How many have $f(3) = 8$? 
+    \item How many have $f(3) \neq 8$?
     \item How many have $f(1) \neq 5$ and are one-to-one?
     \item How many have $f(i)$ even, for all $i$?
     \item How many have $\text{rng}(f) = \{5, 6 \}$?
@@ -18,15 +19,56 @@ Consider the possible functions $f: [7] \rightarrow [9]$
 \end{enumerate}
 \end{problem}
 
+\textbf{Answer:}
+\begin{enumerate}[(a)]
+    \item $f(3)$ has 1 choice. This leaves 6 other values that can go into 9 other bins. I have nine bins, that I can place six values in, with repitition allowed. This is $9^6$.
+    \item $f(3)$ has 8 choices, while the six other values have 9 choices. This is $8 \cdot 9^6$.
+    \item $f(1)$ has 8 choices, $f(2)$ has eight choices (since one was removed by $f(1)$.) Then $f(3)$ has seven choices, $f(4)$ has six choices... This is $8 \cdot (8)_6 = \dfrac{8 \cdot 8!}{(8-6)!}$.
+    \item Instead of 9 choices, we now have 4 choices. So 7 values have 4 choices. This is $4^7$.
+    \item Now we have only two choices, $\{5, 6\}$ for 7 values. This is $2^7$. But, we must guarentee at least one values in $\{5\}$ and one value in $\{6\}$. So subtract out when all the values map to 5 or all the values map to 6, which is two cases. Final answer is $2^7 - 2$.
+    \item For $f^{-1}$ to be a function, the original function $f$ must be one-to-one. We are looking for where the original function is not one-to-one. Base options is 9 choices for 7 values. So $9^7$. But, we need to subtract out the one-to-one option, which is $(9)_7$. The final answer is $9^7 - (9)_7$.
+\end{enumerate}
+
 \setcounter{problem}{6}
 \begin{problem} % Problem 7
 Find the number of onto functions $[k] \rightarrow [4]$.
 \end{problem}
 
+\textbf{Answer:} I am assuming that $k \ge 4$. The base case is $4^k$ options for distribution. Then need to subtract out the following:
+\begin{enumerate}[(a)]
+    \item Missing 3 of the elements in $[4]$. Answer is $4^1 = 4$.
+    \item Missing 2 of the elements in $[4]$. You have $\binom{4}{2} = 6$ elements to miss. You then have $2^k$ ways to distribute the values to the remaining elements. Each distribution has 2 ways that all the values end up on one elements instead of both, so remove those. The answer is $6(2^k - 2)$.
+    \item Missing 1 of the elements in $[4]$. You have $\binom{4}{3}= 4$ different elements to miss. Once you miss, you can select $3^k$ places to go. But you need to guarentee that you don't miss more than 1 element. There are 3 ways to miss 2 elements with $2^k$ places to go. There are 3 ways to miss 3 elements with $1^k$ places to go. The answer is $4(3^k - 3 (2^k - 2) - 3 \cdot 1^k)$
+\end{enumerate}
+
+Final answer is $4^k - (4 + 6(2^k -2) + 4(3^k -(3 + 3( 2^k - 2))))$
+
 \setcounter{problem}{10}
 \begin{problem} % Problem 11
 Give a combinatorial proof. For $n \ge 1$ and $k \ge 1$, then $2^{kn} > \max \{n^k, k^n\}$. Hint: Compare relations to functions.
 \end{problem}
+
+\textbf{Answer:} Before diving into the details with the general case, I'm going to do a numerical example to get us warmed up. Let us define two sets.
+\begin{equation*}
+    K = [4] = \{1, 2, 3, 4\} \quad N = [3] = \{1, 2, 3\}
+\end{equation*}
+
+All the possible relations from $K$ to $N$ are contained in the Cartesian product of $K \times N$.
+\begin{equation}
+    K \times N = \{\{1,1\}, \{1, 2\}, \{1, 3\} \dots \{4, 1\}, \{4, 2\}, \{4, 3\}\}
+\end{equation}
+
+Every possible relation on $K \rightarrow N$ is a subset of $K \times N$. For instance, for the relation $>$ would have $\{\{2, 1\}, \{3, 1\}, \{3, 2\}, \{4, 1\}, \{4, 2\}, \{4, 3\}\}$. So all the possible relations is $\mathscr{P}(K \times N)$, the power set of the cartesian product of $K \times N$. So, the number of possible relations is $2^{|K \times N|}$. If $k = |K|$ and $n = |N|$ then it is $2^{kn}$.
+
+\medskip
+Now, we focus our attention to functions instead of relations. The basic defintion of a function is that every input can only have one output. Thinking about this as distributions, the first number in $K$ has 3 potential choices. The second number in $K$ also has 3 choices, and so one. As a result, when looking at functions, there are $n^k = 3^4 = 81$ possible functions from $K \rightarrow N$. Likewise, if we go the opposite way, from $N \rightarrow K$, there are $k^n = 4^3 = 64$ possible functions.
+
+\medskip
+What this is saying, is the number of possible relations between two sets will always be bigger than the possible functions from one set to another and vice a versa.
+
+\begin{proof}
+Rawr...
+\end{proof}
 
 \section{Chapter 2.2}
 \setcounter{problem}{3}
