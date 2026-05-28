@@ -483,7 +483,7 @@ Rawr
 
 \subsubsection{Counting Integral Solutions}
 
-This section of the book is interested in solving problems of the form. \textit{How many solutions are possible for $z_1 + z_2 + \cdots z_n = k$ where $z_i$ is nonnegative ($z_i \ge 0$)?} Examples of these are:
+This section of the book is interested in solving problems of the form. \textit{How many solutions are possible for $z_1 + z_2 + \cdots + z_n = k$ where $z_i$ is nonnegative ($z_i \ge 0$)?} Examples of these are:
 \begin{align*}
     z_1 + z_2 + z_3 & = 4, \quad z_i \ge 0 \\
     z_1 + z_2 + z_3 + 4z_4 & = 11, \quad z_i \ge 0
@@ -498,6 +498,12 @@ The $4z_4$ term throws a minor wrench into the solution, but nothing impossible.
     z_4 = 1 \quad z_1 + z_2 + z_3 & = 11 - 4 \cdot 1 = 7 \quad \multiset{3}{7}\\
     z_4 = 2 \quad z_1 + z_2 + z_3 & = 11 - 4 \cdot 2 = 3 \quad \multiset{3}{3}
 \end{align*}
+
+So the total numbers of solutions is:
+
+\begin{equation*}
+    \multiset{3}{11} + \multiset{3}{7} + \multiset{3}{3}
+\end{equation*}
 
 \end{document}
 
