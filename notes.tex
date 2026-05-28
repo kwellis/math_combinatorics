@@ -470,7 +470,34 @@ The Erdos-Szekeres theorem (EST) is responsible for proving that a sequence of n
 Last chapter was practicing basic counting techniques and learning principles. Now its time to do some actual combinatorics. We will start with distributions and combinatorial proofs.
 
 \subsection{Counting Functions}
+Rawr
 
+\subsection{Counting Subsets and Multisets}
+
+\begin{thm}
+\textbf{Pascal's identity:} For any $n \ge 1$ and $k \ge 1$,
+\begin{equation*}
+    \binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}
+\end{equation*}
+\end{thm}
+
+\subsubsection{Counting Integral Solutions}
+
+This section of the book is interested in solving problems of the form. \textit{How many solutions are possible for $z_1 + z_2 + \cdots z_n = k$ where $z_i$ is nonnegative ($z_i \ge 0$)?} Examples of these are:
+\begin{align*}
+    z_1 + z_2 + z_3 & = 4, \quad z_i \ge 0 \\
+    z_1 + z_2 + z_3 + 4z_4 & = 11, \quad z_i \ge 0
+\end{align*}
+
+The general case when $z_i \ge 0$ is $\multiset{n}{k}$. If instead a constraint of $z_i \ge 1$ is used, the case is $\multiset{n}{k-n}$. To understand why, we will focus on the first example where $z_1 + z_2 + z_3 = 4 \text{ and } z_i \ge 0 $. This problem is rephrased as \textit{How many ways can you distribute 4 identical items into 3 different boxes?} This is represented with $\multiset{3}{4} = 15$.
+
+\medskip
+The $4z_4$ term throws a minor wrench into the solution, but nothing impossible. We break it down into 3 cases, where $z_4 = 0, 1, 2$. Each one of these cases is solved and the number of solutions added up with the summation rule.
+\begin{align*}
+    z_4 = 0 \quad z_1 + z_2 + z_3 & = 11 - 4 \cdot 0 = 11 \quad \multiset{3}{11} \\
+    z_4 = 1 \quad z_1 + z_2 + z_3 & = 11 - 4 \cdot 1 = 7 \quad \multiset{3}{7}\\
+    z_4 = 2 \quad z_1 + z_2 + z_3 & = 11 - 4 \cdot 2 = 3 \quad \multiset{3}{3}
+\end{align*}
 
 \end{document}
 
