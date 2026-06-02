@@ -118,12 +118,35 @@ Give combinatorial or bijective proofs of the following. Part of your job is to 
     \end{tabular}
     \end{center}
 
-    \item LHS: A concert has n-distinct people attending. The concert is giving away k-guitars. Of the k-guitars a small subset of size j are signed. Each person can only receive one guitar and each guitar can only be signed once. How many different ways can the signed guitars be distributed?
+    \item LHS: A concert has n-distinct people attending. The concert is giving away k-guitars. Of the k-guitars a small subset of size j are signed. Each person can only receive one guitar and each guitar can only be signed once. How many different ways can the unsigned and signed guitars be distributed?
+    
+    \medskip
+    RHS: The same concert has n-distinct people attending. The concert starts by giving away j-guitars that are signed. After the signed guitars are given away, a new subgroup is made of $n-j$ people that didn't receive one. These people are eligible for $k-j$ unsigned guitars. How many ways can the signed and unsigned guitars be distributed.
+
+    \medskip
+    For the identity to be valid, $n > k > j$.
+
+    \item The number of size k multisets from an n-set equals the number of size k subsets from an n+k-1 set. The right hand and left hand of the equivalence equation are shown using non-repeating subset notation.
+    \begin{equation*}
+        \multiset{n}{k} = \binom{n+k-1}{k}, \quad \multiset{k+1}{n-1} = \binom{k+1+n-1-1}{n-1} = \binom{n+k-1}{n-1}
+    \end{equation*}
+
+    As such, the multiset equivalence statement can be written as:
+    \begin{equation*}
+        \binom{n+k-1}{k} = \binom{n+k-1}{n-1}
+    \end{equation*}
+    
+    I need to finish this later and show that with a $[n+k+1]$ set that the complement of the number of $k$ subsets is $n-1$ subsets. So instead, we can count the complement. 
     \end{enumerate}
 
 \begin{problem} % Problem 5
 What does $\binom{n-1}{k-1} + \binom{n-2}{k-1} + \binom{n-3}{k-1} + \dots + \binom{k-1}{k-1}$ equal? Make a conjecture and then give a combinatorial proof.
 \end{problem}
+
+My conjecture is that:
+\begin{equation*}
+    \binom{n}{k} = \binom{n-1}{k-1} + \binom{n-2}{k-1} + \binom{n-3}{k-1} + \dots + \binom{k-1}{k-1}
+\end{equation*}
 
 \setcounter{problem}{6}
 \begin{problem} % Problem 7
@@ -145,14 +168,47 @@ Determine the number of solutions to each of the following equations. Assume all
 \section{Chapter 2.3}
 \setcounter{problem}{1}
 \begin{problem} % Problem 2
-Rawr
+For any integer $n \ge 2$, how many onto functions $[n] \rightarrow [n-1]$ are possible? Give a formula that doesn't involve Stirling numbers.
 \end{problem}
 
 
 \setcounter{problem}{6}
 \begin{problem} % Problem 7
-Rawr
+Find the number of equivalence relations on an $n$-set.
 \end{problem}
 
+\setcounter{problem}{13}
+\begin{problem} % Problem 14
+Here is a simple recursive python program for computing $S(n,k)$ based on Theorem 2.3.1. The program assumes $n,k \ge 0$. It works but it is extremely wasteful. Why? Design a more efficient algorithm.
+\begin{minted}{python}
+def Stirling(n: int, k: int):
+    if n == k:
+        return 1
+    elif n < k:
+        return 0
+    elif n > 0 and k == 0:
+        return 0
+    else:
+        return Stirling(n-1, k-1) + k*Stirling(n-1, k)
+\end{minted}
+\end{problem}
+Yeah, this is some garbage code for show.
+
+\setcounter{problem}{16}
+\begin{problem}
+Solve a linear system to find numbers $a, b, c, d, e$ so that the following polynomial equation is true:
+\begin{equation*}
+    x^4 = a \cdot x_0 + b \cdot x_1 + c \cdot x_2 + d \cdot x_3 + e \cdot x_4
+\end{equation*}
+In the equation, the following represent $x_1, x_2 \dots x_0$.
+\begin{align*}
+    x_4 & = x(x-1)(x-2)(x-3) \\
+    x_3 & = x(x-1)(x-2) \\
+    x_2 & = x(x-1) \\
+    x_1 & = x \\
+    x_0 & = 1
+\end{align*}
+Express the solution $a,b,c,d,e$ in terms of numbers studied in this section. Use linear algerbra and formulas for expanding the coefficients.
+\end{problem}
 
 \end{document}
