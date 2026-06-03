@@ -505,5 +505,32 @@ So the total numbers of solutions is:
     \multiset{3}{11} + \multiset{3}{7} + \multiset{3}{3}
 \end{equation*}
 
+\subsection{Counting Set Partitions}
+
+A partition is breaking up a set $S$ into small subsets that are disjoint but whose union are $S$. For example, if $S = [5] = \{1,2,3,4,5\}$. Possible partitions are $\{\{1,2,3\},\{4,5\}\}$ and $\{\{1,2\},\{3,4\},\{5\}\}$. The first partition is a 2-partition while the second partition is a 3-partition. The elements of the partition are called the \textbf{blocks} of the partition. Important features of partitions are:
+
+\begin{enumerate}
+    \item Each element of $S$ appears in exactly one block of the partition
+    \item The order in which we list the blocks makes no difference.
+\end{enumerate}
+
+Set partitions with designated block sizes are counted using \textbf{Stirling numbers}, defined as $S(n,k)$. The nomenclature $S(n,k)$ is the number of partitions of an $n$-set into $k$-blocks.
+\begin{equation*}
+    S(n,k) = \dfrac{1}{k!} \sum_{j=0}^{k} \binom{k}{j} (-1)^j (k-j)^n
+\end{equation*}
+
+Set partitions with \textbf{no} designated block sizes are counted using \textbf{Bell number}, defined as $B(n)$. This means it counts all the partitions of \textit{any} size. The intuitive computation of the Bell number is summing all Stirling numbers with a partition size of 1 to n. The alternate formula is
+\begin{equation*}
+    B(n) = \dfrac{1}{e} \sum_{j=0}^{\infty} \dfrac{j^n}{j!}
+\end{equation*}
+
+This formula is crazy, because it relates an irrational number to an infinite sum. More information is given in Section 4.3.
+
+\subsubsection{Counting Onto Functions}
+
+\begin{thm}
+    If $k \ge 1$ and $n \ge 1$, then the number of onto functions $[k] \rightarrow [n]$ equals $S(k,n) \cdot n!$.
+\end{thm}
+
 \end{document}
 
