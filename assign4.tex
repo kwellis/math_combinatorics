@@ -176,12 +176,23 @@ On page 69 of the book, it shows that the special case of Stirling number $S(n, 
 \begin{equation*}
     S(n, n-1) = \binom{n}{2}
 \end{equation*}
+Later, counting onto functions $[k] \rightarrow [n]$ is equal to $S(k,n) \cdot n!$. Putting it all together, the number of onto functions with $[n] \rightarrow [n-1]$ is:
+
+\begin{equation*}
+    \binom{n}{2} \cdot (n-1)!
+\end{equation*}
 
 
 \setcounter{problem}{6}
 \begin{problem} % Problem 7
 Find the number of equivalence relations on an $n$-set.
 \end{problem}
+
+\textbf{Answer:}
+On page 217 in ``\textit{Book of Proof}'' by Richard Hammack it makes the following statements regarding partitions and equivalence relations. ``\textit{Thus equivalence relations and partitions are really just two different ways of looking at the same thing}''. So really, the question could be rephrased as \textit{Find the number of partitions on an $n$-set}. The number of equivalence relations / partitions is the Bell Number, $B(n)$.
+\begin{equation*}
+    B(n) = \sum_{k=1}^{n} S(n,k) \quad \text{for all } n \ge 1. 
+\end{equation*}
 
 \setcounter{problem}{13}
 \begin{problem} % Problem 14
