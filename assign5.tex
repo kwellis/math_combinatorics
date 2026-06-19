@@ -66,8 +66,23 @@ j & 1-Block & 2-Block & 3-Block \\
 \end{tabular}
 \end{center}
 
-Testing the water of Lake Minnetonka.
+LHS: The left hand side counts the possible number of partitions of a n-set, denoted as $[n]$ with k-blocks. This set of possible partitions is $\mathcal{P}$ with size $|\mathcal{P}|$.
 
+\medskip
+RHS: Take element $1$ from $[n]$ and anchor it to the first block from $k$. Then $j$ is the number of elements that are inside the first block. This means there are $j-1$ other elments inside the first block and there are $n-1$ options to choose from. This is represented as $\binom{n-1}{j-1}$.
+
+\medskip
+Since the first block is defined, there are $k-1$ other blocks to fill in. A selection of $n-j$ elements are available to place in the remaining blocks. This leaves $S(n-j, k-1)$ different sets of partitions.
+
+\medskip
+The first block has a unique anchored element inside it which makes it independent of the other $k-1$ partitions. This allows the product rule to be applied for the number of options. $\binom{n-1}{j-1}S(n-j, k-1)$.
+
+\medskip
+As $j$ increases in value, the number of elements in the first block grows. As such, each set of partitions with different values of $j$ is disjoint, allowing them to be added without double counting. Represented as $\sum_{j=1}^{n} \binom{n-1}{j-1}S(n-j, k-1)$. This proves that:
+
+\begin{equation*}
+    S(n,k) = \sum_{j=1}^{n} \binom{n-1}{j-1} S(n-j, k-1)
+\end{equation*}
 
 \section{Chapter 2.4}
 \setcounter{problem}{0}
