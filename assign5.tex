@@ -99,6 +99,16 @@ You have 40 pieces of candy to distribute among 10 children. Find the number of 
 \end{problem}
 
 \textbf{Answer:}
+I belive this is as simple as using the table on page 81 of the book for "lookup".
+
+\begin{enumerate}[(a)]
+    \item Distribute 40 distinct objects to 10 distinct recipients, each gets at least one. $$S(k,n) \cdot n!$$
+    \item Distribute 40 identical objects to 10 distinct reipients, no restrictions. $$\multiset{n}{k}$$
+    \item Distribute 40 distinct objects to 10 identical recipients, no restrictions. $$\sum_{i=1}^{n}S(k,i)$$
+    \item Distribute 40 identical objects to 10 identical recipients, each gets at least one. $$P(k,n)$$
+    \item Distribute 40 distinct objects to 10 distinct recipients, each gets one piece. $$(n)_k$$
+    \item Distribute 40 distinct objects to 10 distinct reipients, but Frank gets 4 pieces.$$\binom{40}{4} \cdot 9^{36}$$
+\end{enumerate}
 
 
 \setcounter{problem}{3}
@@ -113,6 +123,48 @@ Use type vectors to establish the bijection in Theorem 2.4.2.
 \end{problem}
 
 \textbf{Answer:}
+Each value inside the original integer partion will have its value decreased by one. For example, take the integer partition of 6 into 3 pieces. This becomes the integer partition of 3 into at most 3 pieces. See the table below for an example.
+
+\begin{center}
+\begin{tabular}{ |c|c|c|c| } 
+\hline
+j & $P(6,3)$ & Subtract 1 & $P(3,j)$ \\
+\hline
+1 & $\{4,1,1\}$ & $\{4-1,1-1,1-1\}$ & $\{3\}$ \\
+2 & $\{3,2,1\}$ & $\{3-1,2-1,1-1\}$ & $\{2, 1\}$ \\
+3 & $\{2,2,2\}$ & $\{2-1,2-1,2-1\}$ & $\{1, 1, 1\}$ \\  
+ \hline
+\end{tabular}
+\end{center}
+
+The greatest value possible in the type vector is $n-(k-1)$. This occurs when all the integer partition values are $1$ with the exception of the first value. The example of this in the table being $\{4,1,1\}$. Mathematically represented as $n-(k-1) = n-k+1$. The function takes in the original type vector partition, subtracts 1 from each value, while maintaining the same number of exponents.
+
+\begin{equation*}
+f([1^{P_1}2^{P_2}\cdots (n-k+1)^{P_{n-k+1}}]) = [1^{P_2}2^{P_3}\cdots (n-k)^{P_{n-k+1}}]
+\end{equation*}
+
+On the left hand side, the integer $n$ and the number of partitions $k$ are:
+
+\begin{equation*}
+    n = \sum_{j=1}^{n-k+1} j \cdot P_j \quad \text{and} \quad k = \sum_{j=1}^{n-k+1} P_j
+\end{equation*}
+
+On the right hand side, the integer $n-k$ and the number of partitions $k$ are:
+
+\begin{equation*}
+    n-k = \sum_{j=2}^{n-k+1} (j-1) \cdot P_j \quad \text{and} \quad k = \sum_{j=2}^{n-k+1} P_j
+\end{equation*}
+
+The inverse function from the smaller type vector back to the larger type vector is:
+
+\begin{equation*}
+    g([1^{P_1}2^{P_2}\cdots n^{P_{n}}]) = g([1^{n-k}2^{P_1}3^{P_2}\cdots n+1^{P_{n}}])
+\end{equation*}
+
+Where:
+\begin{equation*}
+    k = \sum_{j=1}^n P_j
+\end{equation*}
 
 
 \setcounter{problem}{6}
@@ -120,14 +172,50 @@ Use type vectors to establish the bijection in Theorem 2.4.2.
 Under what conditions on $n$ and $k$ is the statement $P(n,k) = P(n-1, k-1)$ true?
 \end{problem}
 
-\textbf{Answer:}
+\textbf{Answer:} Under the following two options:
+\begin{enumerate}
+    \item $n=k$ if $n,k \ge 1$
+    \item $n=k+1$ if $k > 1$
+\end{enumerate}
+See the partition number triangle on page 79.
 
 
 \begin{problem} % Problem 8
-Give a bijective proof of the following: The number of partitions of $n$ is equal to the number of partitions of $2n$ into $n$ parts.
+Give a bijective proof of the following: The number of partitions of $n$ is equal to the number of partitions of $2n$ into $n$ parts. $P(n) = P(2n, n)$.
 \end{problem}
 
 \textbf{Answer:}
+The book gives the following hint: \textit{Given a partition of n, add 1 to each existing part and then append enough parts of size 1 to bring the total number of parts to n}. An example will be done for $P(4)$ which translates into $P(8, 4)$.
 
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+\hline
+$P(4)$ & Add 1 & $P(8,4)$ \\
+\hline
+$\{4\}$ & $\{4+1, 1, 1, 1\}$ & $\{5,1,1,1\}$ \\
+$\{3,1\}$ & $\{3+1,1+1,1, 1\}$ & $\{4, 2, 1, 1\}$ \\
+$\{2,2\}$ & $\{2+1,2+1,1,1\}$ & $\{3, 3, 1, 1\}$ \\
+$\{1,1,1,1\}$ & $\{1+1,1+1,1+1,1+1\}$ & $\{2,2,2,2\}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+The function $f: A \rightarrow B$ has domain $A$ and codomain $B$ in $\NN$ for all $P_j$ and $j$ in the type vectors.
+
+\begin{equation*}
+    f([1^{P_1}2^{P_2}\cdots n^{P_n}]) = [1^{n-k}2^{P_1}3^{P_2}\cdots (n+1)^{P_n}]
+\end{equation*}
+
+Where $k = \sum_{j=1}^{n} P_j$.
+
+\medskip
+To prove the function is injective, or one to one, we suppose that $a_1, a_2 \in A$ and $a_1 \neq a_2$. The function $f: A \rightarrow B$ adds $1$ to each value of $j \in a_1 \text{ or } a_2$. Since $a_1 \neq a_2$ then $a_1 + 1 \neq a_2 +1$ as such $f(a_1) \neq f(a_2)$ and the function is injective.
+
+\medskip
+To prove the function is surjective, or onto, we suppose that $b \in B$. The inverse of the function $f$ is $g$. Where for each $g(b) = a$ for $f(a) = b$. The function of $g$ is shown below.
+
+\begin{equation*}
+    g([1^{P_1}2^{P_2}\cdots (n-k+1)^{P_{n-k+1}}]) = [1^{P_2} 2^{P_3} \cdots (n-k)^{P_{n-k+1}}]
+\end{equation*}
 
 \end{document}
