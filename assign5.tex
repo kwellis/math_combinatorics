@@ -200,22 +200,34 @@ $\{1,1,1,1\}$ & $\{1+1,1+1,1+1,1+1\}$ & $\{2,2,2,2\}$ \\
 \end{tabular}
 \end{center}
 
-The function $f: A \rightarrow B$ has domain $A$ and codomain $B$ in $\NN$ for all $P_j$ and $j$ in the type vectors.
+Define $A$ as the set of all partitions of $n$ and $B$ as the set of partitions of $2n$ into $n$ parts. Define the function $f: A \rightarrow B$ by
 
 \begin{equation*}
     f([1^{P_1}2^{P_2}\cdots n^{P_n}]) = [1^{n-k}2^{P_1}3^{P_2}\cdots (n+1)^{P_n}]
 \end{equation*}
 
-Where $k = \sum_{j=1}^{n} P_j$.
-
-\medskip
-To prove the function is injective, or one to one, we suppose that $a_1, a_2 \in A$ and $a_1 \neq a_2$. The function $f: A \rightarrow B$ adds $1$ to each value of $j \in a_1 \text{ or } a_2$. Since $a_1 \neq a_2$ then $a_1 + 1 \neq a_2 +1$ as such $f(a_1) \neq f(a_2)$ and the function is injective.
-
-\medskip
-To prove the function is surjective, or onto, we suppose that $b \in B$. The inverse of the function $f$ is $g$. Where for each $g(b) = a$ for $f(a) = b$. The function of $g$ is shown below.
+Where $k = \sum_{j=1}^{n} P_j$. That is, $f$ takes a partition of $n$ adds the value $1$ to all existing parts and adds individual $1$'s to increse the total to $2n$. The inverse of the function $f$ is $g$. Where for each $g(b) = a$ for $f(a) = b$. The function of $g$ is shown below.
 
 \begin{equation*}
     g([1^{P_1}2^{P_2}\cdots (n-k+1)^{P_{n-k+1}}]) = [1^{P_2} 2^{P_3} \cdots (n-k)^{P_{n-k+1}}]
 \end{equation*}
+
+\medskip
+\textbf{One-to-one:} Let $[1^{p_1}2^{p_2}\cdots n^{p_n}]$ and $[1^{q_1}2^{q_2}\cdots n^{q_n}]$ be partitions in $A$ and assume that 
+
+\begin{equation*}
+   f([1^{p_1}2^{p_2}\cdots n^{p_n}]) = f([1^{q_1}2^{q_2}\cdots n^{q_n}]) 
+\end{equation*}
+
+This means that $[1^{n-k}2^{p_1}\cdots (n+1)^{p_n}] = [1^{n-k}2^{q_1}\cdots (n+1)^{q_n}]$ and that $p_i = q_i$ for all $i$. Therefore $[1^{p_1}2^{p_2}\cdots n^{p_n}] = [1^{q_1}2^{q_2}\cdots n^{q_n}]$.
+
+\medskip
+\textbf{Onto:} Let $[1^{q_1}2^{q_2}3^{q_3} \cdots (n-k+1)^{q_{n-k+1}}]$ be in $B$. Notice that for a parition of $n$ into $k$ integers, the max value of the $k$ integer is $n-k+1$, so we are justified in stopping the type vector there. Moreover
+
+\begin{equation*}
+    f([1^{q_2}2^{q_3}\cdots (n-k)^{P_{n-k+1}}]) = [1^{n-k}2^{q_2}3^{q_3} \cdots (n-k+1)^{P_{n-k+1}}]
+\end{equation*}
+
+Where $q_1 = n-k$, so $f$ is onto.
 
 \end{document}
