@@ -1,6 +1,6 @@
 \documentclass{article}
 
-\newcommand{\doctitle}{Assignment 5} % change document title
+\newcommand{\doctitle}{Assignment 6} % change document title
 \usepackage{ellis_header}
 
 \begin{document}
@@ -12,6 +12,14 @@ How many integers in $[100]$ are not divisible by 4, 6, or 7?
 \end{problem}
 
 \textbf{Answer:}
+\begin{align*}
+    N_{\ge}(\emptyset) = 100 \quad \quad & N_{\ge}(d_4, d_6) = \floor{\dfrac{100}{4 \cdot 6}} = 4 \\
+    N_{\ge}(d_4) = \floor{\dfrac{100}{4}} = 25 \quad \quad & N_{\ge}(d_4, d_7) = \floor{\dfrac{100}{4 \cdot 7}} = 3 \\
+    N_{\ge}(d_6) = \floor{\dfrac{100}{6}} = 16 \quad \quad & N_{\ge}(d_6, d_7) = \floor{\dfrac{100}{6 \cdot 7}} = 2 \\
+    N_{\ge}(d_7) = \floor{\dfrac{100}{7}} = 14 \quad \quad & N_{\ge}(d_4, d_6, d_7) = \floor{\dfrac{100}{4 \cdot 6 \cdot 7}} = 0
+\end{align*}
+
+The answer is $100 - (25+16+14) + (4 + 3 + 2) - 0 = 36$
 
 \setcounter{problem}{5}
 \begin{problem} % Problem 6
