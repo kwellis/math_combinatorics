@@ -580,15 +580,57 @@ The principle of inclusion-exclusion is the big brother of set-union formulas li
 
 \subsubsection{At Least vs Equals}
 
-Try to summarize the stuff on page 85 and 86 a bit more...
+Up until this point in the book, most of the questions have been more focused on \textit{equals}. We need to now start understanding how to account for questions of \textit{at least}.
 
 \begin{definition}
     Let $\mathcal{U}$ be a universe of objects and let $P$ be a set of properties that the objects may or may not have. For any subset $J$ or $P$, define the following expressions:
     \begin{itemize}
-        \item $N_{\ge}(J)$ equals the number of objects in $\mathcal{U}$ that have \textbf{at least} the properties in $J$ and possibly others
-        \item $N_{=}(J)$ equals the number of objects in $\mathcal{U}$
+        \item $N_{\ge}(J)$ equals the number of objects in $\mathcal{U}$ that have \textbf{at least} the properties in $J$ and \textbf{possibly} others
+        \item $N_{=}(J)$ equals the number of objects in $\mathcal{U}$ that have \textbf{exactly} the properties in $J$ and \textbf{no} others
     \end{itemize}
 \end{definition}
+
+You start with the size of a known universe, $\mathcal{U}$, which is defined as the number of objects that have \textbf{at least} none of the properties, $N_{\ge}(\emptyset)$. We are typically trying to answer questions that have \textbf{exactly} none of the properties. For an example, we are asked how many integers in $[100]$ are not divisible by 2, 3 or 5?
+
+\medskip
+The question we want to know, is \textbf{exactly} how many numbers are not divisible by 2, 3, or 5. Written as $N_{=}(\emptyset)$. The starting point, is saying all the values in $[100]$ are not divisible by 2, 3 or 5, but also, they might be? So its written as $N_{\ge}(\emptyset)$. I personally think it would be easier to just think about this as the size of the $|\mathcal{U}|$.
+
+\medskip
+We can define the following properties
+\begin{itemize}
+    \item $d_2 :=$ ``the integer is divisible by 2''
+    \item $d_3 :=$ ``the integer is divisible by 3''
+    \item $d_5 :=$ ``the integer is divisible by 5''
+\end{itemize}
+
+Relating this to $N$ notation, we have:
+\begin{itemize}
+    \item $N_{\ge}(d_2)$ - Number of items that are at least divisible by 2 (might have other properties)
+    \item $N_{\ge}(d_3)$ - Number of items that are at least divisible by 3 (might have other properties)
+    \item $N_{\ge}(d_5)$ - Number of items that are at least divisible by 5 (might have other properties)
+    \item $N_{\ge}(d_2,d_3)$ - Number of items that are at least divisible by 2 and 3 (might have other properties)
+\end{itemize}
+
+Written out fully, this appears as the following:
+
+\begin{equation*}
+\begin{aligned}
+    N_{=}(\emptyset) ={}& N_{\ge}(\emptyset) - (N_{\ge}(d_2)+N_{\ge}(d_3)+N_{\ge}(d_5)) \\
+    &+ (N_{\ge}(d_2,d_3)+N_{\ge}(d_3,d_5)+N_{\ge}(d_3,d_5)) - N_{\ge}(d_2, d_3, d_5)
+\end{aligned}
+\end{equation*}
+
+\subsubsection{Inclusion-Exclusion Formula}
+
+\begin{thm}
+Let $U$ be a universe of objects and let $P$ be a set of properties that the objects may or may not have. Then the number of objects in $U$ with none of the properties is
+
+\begin{equation*}
+    N_{=}(\emptyset) = \sum_{J:J \subseteq P} (-1)^{|J|} N_{\ge}(J)
+\end{equation*}
+\end{thm}
+
+Breaking this down into regular speak. Lets look at the example of $[100]$ divisible by $2, \: 3$ or $5$ and define the set $P$ as the following.
 
 \end{document}
 
