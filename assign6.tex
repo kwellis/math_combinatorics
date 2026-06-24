@@ -28,6 +28,42 @@ The answer is $100 - (25+16+14) + (8 + 3 + 2) - 1 = 57$
 
 \textbf{Answer:}
 
+Before diving into the general $n$ solution. Lets look at an example party problem, with 3 people, called Kaelin, Alyse and Donna. The three cases to avoid are the following:
+\begin{align*}
+    h_k := & \: \text{``Kaelin gets his own hat back''} \\
+    h_a := & \: \text{``Alyse gets her own hat back''} \\
+    h_d := & \: \text{``Donna gets her own hat back''}
+\end{align*}
+
+So the set $P = \{h_k, h_a, h_d\}$ and the possible subsets of the problem are: $$J = \{\emptyset, \{h_k\}, \{h_a\}, \{h_d\}, \{h_k h_a\}, \{h_k h_d\}, \{h_a h_d\}, \{h_k h_a h_d\} \}$$ Instead of looping through each element in $J$ and adding them individually, a better approach would be to group cases where the same amount of people receive there own hat back. For instance.
+\begin{itemize}
+    \item $j = 0$, at least no one gets there hat back, $\emptyset$, 1 option 
+    \item $j = 1$, at least one person gets there hat back, $\{h_k\}, \{h_a\}, \{h_d\}$, 3 options
+    \item $j = 2$, at least two persons gets there hat back, $\{h_kh_a\}, \{h_kh_d\}, \{h_ah_d\}$, 3 options
+    \item $j = 3$, at least three persons gets there hat back, $\{h_kh_ah_d\}$, 1 option
+\end{itemize}
+Each of the number of options can be represensented as ``With 3 people, how many ways can $j$ people get there hat back''? This is represented as $\binom{3}{j}$ or $\binom{n}{j}$ for a general amount of people, $n$. 
+
+\medskip
+Now we look at how to distribute the hats to people. If we didn't need to fix anyone getting there hat, the ways to distribute them would be $3!$. Kaelin would have 3 options, Alyse would have 2 options and Donna would have 1 option. If instead we fixed one person, say Kaelin, then you only have 2 options to choose from, $2!$. This is represented mathematically as $(3-j)!$ or $(n-j)!$ for the general case.
+
+\medskip
+Putting this together for the 3-person example we have:
+\begin{equation*}
+    D_3 = \sum_{j=0}^{3}\binom{3}{j}(-1)^{j}(3-j)!
+\end{equation*}
+
+Where the $(-1)^{j}$ is the book keeping for ensuring odd values are subtracted and evens added. This prevents accidental double counting of values that appear in multiple cases. For the general case, where its $n$ people, the equation is:
+\begin{equation*}
+    D_n = \sum_{j=0}^{n}\binom{n}{j}(-1)^{j}(n-j)!
+\end{equation*}
+
+Algebraically, this can be simplified starting with substiting the combination for its formula.
+
+\begin{equation*}
+    D_n = \sum_{j=0}^{n}\dfrac{n!}{j!(n-j)!}(-1)^{j}(n-j)! = n! \sum_{j=0}^{n}\dfrac{(-1)^{j}}{j!}
+\end{equation*}
+
 \begin{problem} % Problem 7
 The number $D_n$ is the hat check problem for general $n$.
 \begin{enumerate}[(a)]
@@ -37,6 +73,19 @@ The number $D_n$ is the hat check problem for general $n$.
 \end{problem}
 
 \textbf{Answer:}
+
+\begin{enumerate}[(a)]
+    \item Looking at the limit of the hat check derangement over the total ways to distribute the hats.
+    \begin{equation*}
+        \dfrac{D_n}{n!} = \dfrac{n!}{n!} \sum_{j=0}^{n}\dfrac{(-1)^{j}}{j!} = \sum_{j=0}^{n}\dfrac{(-1)^{j}}{j!}
+    \end{equation*}
+    The inverse of Euler's number can be expressed with the following infinite series.
+    \begin{equation*}
+        \dfrac{1}{e} = \sum_{j=0}^{\infty}\dfrac{(-1)^{j}}{j!}
+    \end{equation*}
+    As $n \rightarrow \infty$ the summation approachs $1/e$. So the limit is the inverse of Euler's number.
+    \item Explanation of the alternating series remainder term theorem from calculus \href{https://content.dodea.edu/VS/HS/AP_Calculus/websites/AP_Calculus_M9/section9_5c/docs/Lesson%2009.05c.06%20The%20Alternating%20Series%20Remainder%20Theorem.pdf}{here}.
+\end{enumerate}
 
 \setcounter{problem}{7}
 \begin{problem} % Problem 8
