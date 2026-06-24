@@ -616,7 +616,7 @@ Written out fully, this appears as the following:
 \begin{equation*}
 \begin{aligned}
     N_{=}(\emptyset) ={}& N_{\ge}(\emptyset) - (N_{\ge}(d_2)+N_{\ge}(d_3)+N_{\ge}(d_5)) \\
-    &+ (N_{\ge}(d_2,d_3)+N_{\ge}(d_3,d_5)+N_{\ge}(d_3,d_5)) - N_{\ge}(d_2, d_3, d_5)
+    &+ (N_{\ge}(d_2,d_3)+N_{\ge}(d_2,d_5)+N_{\ge}(d_3,d_5)) - N_{\ge}(d_2, d_3, d_5)
 \end{aligned}
 \end{equation*}
 
@@ -630,7 +630,21 @@ Let $U$ be a universe of objects and let $P$ be a set of properties that the obj
 \end{equation*}
 \end{thm}
 
-Breaking this down into regular speak. Lets look at the example of $[100]$ divisible by $2, \: 3$ or $5$ and define the set $P$ as the following.
+Breaking this down into regular speak. Lets look at the example of $[100]$ divisible by $2, \: 3$ or $5$. $P$ is the set with properties we don't want. For example:
+\begin{equation*}
+    P = \{d_2, d_3, d_5\}
+\end{equation*}
+
+$J$ is all the possible subsets of $P$, including the empty set.
+
+\begin{equation*}
+    J = \{\emptyset, \{d_2\}, \{d_3\}, \{d_5\}, \{d_2, d_3\}, \{d_2, d_5\}, \{d_3, d_5\}, \{d_2, d_3, d_5\}\}
+\end{equation*}
+
+Then the inclusion-exclusion formula sums across how many values in your universe possess the following properties. What is interesting, is whether you add or subtract the subset depends on whether the number of properties is an even number (add) or an odd number (subtract). This is managed with $(-1)^{|J|}$.
+
+\medskip
+Page 92 has a really good example that asks the question: ``How many integers in $[100]$ are divisible by $2$ but not by $3$ or $5$?'' It is worth looking at it and checking it out.
 
 \end{document}
 
