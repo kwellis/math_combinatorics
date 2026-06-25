@@ -102,16 +102,23 @@ The number $D_n$ is the hat check problem for general $n$.
     \begin{equation*}
         D_n = n! \sum_{j=0}^{n}\dfrac{(-1)^{j}}{j!}
     \end{equation*}
-    The number of derangements over total permutations $D_n / n!$ is a converging series since it meets the alternating series theorem criteria.
+    The number of derangements over total permutations $D_n / n!$ is a converging series, as it meets the alternating series theorem criteria.
     \begin{equation*}
         \lim_{j \rightarrow \infty}\dfrac{1}{j!} = 0 \quad \text{and} \quad \dfrac{1}{(j+1)!} < \dfrac{1}{j!}
     \end{equation*}
-    We know that this series convergest to $1/e$ with $n$ approaching infinity.
+    This series converges to $1/e$ as $n$ approaches infinity.
     \begin{equation*}
         \dfrac{D_n}{n!} = \sum_{j=0}^{\infty}\dfrac{(-1)^{j}}{j!} = \dfrac{1}{e}
     \end{equation*}
-
-
+    The alternating series remainder theorem states the max difference between the summation evaluted at $n$ and the final converged value will be less than the single valve at $n+1$. For the probability of derangements this appears as
+    \begin{equation*}
+        \sum_{j=0}^{n}\dfrac{(-1)^{j}}{j!} - \dfrac{1}{e} \le \dfrac{1}{(n+1)!}
+    \end{equation*}
+    Multiplying through by $n!$ for number of derangements.
+    \begin{equation*}
+        n!\sum_{j=0}^{n}\dfrac{(-1)^{j}}{j!} - \dfrac{n!}{e} \le \dfrac{n!}{(n+1)n!} = \dfrac{1}{n+1}
+    \end{equation*}
+    As such the difference between $D_n$ and $n!/e$ will always be less than an integer, allowing rounding the irrational number to provide an accurate count.
     \end{proof}
 \end{enumerate}
 
