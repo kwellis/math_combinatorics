@@ -85,6 +85,17 @@ The number $D_n$ is the hat check problem for general $n$.
     \end{equation*}
     As $n \rightarrow \infty$ the summation approachs $1/e$. So the limit is the inverse of Euler's number.
     \item Explanation of the alternating series remainder term theorem from calculus \href{https://content.dodea.edu/VS/HS/AP_Calculus/websites/AP_Calculus_M9/section9_5c/docs/Lesson%2009.05c.06%20The%20Alternating%20Series%20Remainder%20Theorem.pdf}{here}.
+    
+    \medskip
+    Before jumping right into using the alternating series remainder theorem, we need to first show the series converges. The criteria is:
+    \begin{equation*}
+        \lim_{j \rightarrow \infty}\dfrac{1}{j!} = 0 \quad \text{and} \quad \dfrac{1}{(j+1)!} < \dfrac{1}{n!}
+    \end{equation*}
+    So it passes. We can now apply the alternating series remainder theorem. This says the error of evaluated term will be less than or equal to the value of the first term left off. When $j=0 \text{ or } 1$ the series value is 1, 0. This doesn't make sense to begin evaluating the series at these values. The first value that makes sense is $j=2$, so two people.
+    \begin{equation*}
+        \sum_{j=0}^{2}\dfrac{(-1)^{j}}{j!} = 1 - 1 + 1/2 = 1/2
+    \end{equation*}
+    The next term is $j=3$ which gives $1/6$. So the low and high side of the $j=2$ case is $1/2 \pm 1/6 = (2/6, 4/6)$ or $(1/3, 2/3)$. The value this finally converges to is $1/e = 1.1/3$ which falls inside the boundary.
 \end{enumerate}
 
 \setcounter{problem}{7}
