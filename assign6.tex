@@ -129,11 +129,41 @@ How many ways can you distribute 20 identical objects to 10 distinct recipients 
 
 \textbf{Answer:}
 
+The empty set at least (base case) is how many ways can you distribute 20 identical objects to 10 distinct recipients. This is
+\begin{equation*}
+    N_{\ge}(\emptyset) = \multiset{10}{20}
+\end{equation*}
+Then you need to evaluate the following cases which are:
+\begin{enumerate}[(a)]
+    \item $P_1$ - 1 person receives 6 or more objects
+    \item $P_2$ - 2 people receives 6 or more objects
+    \item $P_3$ - 3 people receives 6 or more objects
+\end{enumerate}
+Taking the first case, $P_1$. Out of the 10 recipients, you can select 1 recipient to receive at least 6 objects. mathematically this is $\binom{10}{1}$, then you need to distribute the remaining 14 objects to the 10 recipients. Those objects can go to any person, all that matters is that at least 1 recipient has at least 6 objects, $\multiset{10}{14}$.
+\begin{equation*}
+    N_{\ge}(P_1) = \binom{10}{1} \multiset{10}{14}
+\end{equation*}
+Second case $P_2$, now two recipients get at least 6 objects. So you have 8 objects left over to distribute to the ten recipients.
+\begin{equation*}
+    N_{\ge}(P_2) = \binom{10}{2} \multiset{10}{8}
+\end{equation*}
+Third case $P_3$, now three recipients get at least 6 objects. So you have 2 objects left over to distribute to the ten recipients.
+\begin{equation*}
+    N_{\ge}(P_3) = \binom{10}{3} \multiset{10}{2}
+\end{equation*}
+The total answer is:
+\begin{equation*}
+    \multiset{10}{20} - \binom{10}{1} \multiset{10}{14} + \binom{10}{2} \multiset{10}{8} - \binom{10}{3} \multiset{10}{2}
+\end{equation*}
+
 \begin{problem} % Problem 9
 How many ways can you distribute $k$ identical objects to $n$ distinct recipients so that each recipient receives at most $r$ objects?
 \end{problem}
 
-\textbf{Answer:}
+\textbf{Answer:} I just took problem 8 and make it a general case for problem 9.
+\begin{equation*}
+    \sum_{j=0}^{k/(r+1)} (-1)^j \binom{n}{j} \multiset{n}{k-j(r+1)} 
+\end{equation*}
 
 \setcounter{problem}{16}
 \begin{problem} % Problem 17
