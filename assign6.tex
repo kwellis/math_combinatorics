@@ -174,6 +174,18 @@ A taxi drives from the intersection labeled $A$ to the intersection labeled $B$ 
 \end{enumerate}
 \end{problem}
 
-\textbf{Answer:} Start by defining the different types of points. Ones that can go up and right. Ones that can only go up, ones that can only go right. Use the knowledge that each point has two choices (up or right) with a few exceptions.
+\textbf{Answer:} To get from $A$ to $B$ requires moving across $16$ points. Each one of those points you can make two decisions, either move right $1$ or move up $0$. To reach your desired endpoint requires you to make exactly $10$ right moves or exactly $6$ up moves. So you have this many paths to choose from:
+\begin{equation*}
+    \binom{16}{10} = \binom{16}{6}
+\end{equation*}
+Imagine you have a bag of labels that look like, where if you select a label, it means you will move right on that move. So $m_1$ implies you move right on the first move. If you don't select the label, you need to move up.
+\begin{equation*}
+    \{m_1, m_2, m_3, \dots m_{16}\}
+\end{equation*}
+Because you have defined the moves in terms of right moves, you need to pick $10$ for a fully defined sequence. So the following would be a good example, which creates a zig zag pattern initially.
+\begin{equation*}
+    \{m_1, m_3, m_5, m_7, m_9, m_{11}, m_{13}, m_{14}, m_{15}, m_{16}\}
+\end{equation*}
+
 
 \end{document}
