@@ -179,7 +179,7 @@ A taxi drives from the intersection labeled $A$ to the intersection labeled $B$ 
 \begin{enumerate}[(a)]
     \item To get from $A$ to $B$ requires moving across $16$ points. Each one of those points you can make two decisions, either move right $1$ or move up $0$. To reach your desired endpoint requires you to make exactly $10$ right moves or exactly $6$ up moves. So you have this many paths to choose from:
     \begin{equation*}
-        \binom{16}{10} = \binom{16}{6}
+        \binom{16}{10} = \binom{16}{6} = 8008
     \end{equation*}
     Imagine you have a bag of labels that look like, where if you select a label, it means you will move right on that move. So $m_1$ implies you move right on the first move. If you don't select the label, you need to move up.
     \begin{equation*}
@@ -189,7 +189,24 @@ A taxi drives from the intersection labeled $A$ to the intersection labeled $B$ 
     \begin{equation*}
         \{m_1, m_3, m_5, m_7, m_9, m_{11}, m_{13}, m_{14}, m_{15}, m_{16}\}
     \end{equation*}
-    \item Rawr
+    \item Need to describe the four congested intersections. They will be described as the total number of moves and number of right moves.
+    \begin{enumerate}[(i)]
+        \item $I_a :=$ Total: $5$ and rights: $2$, Math $\binom{5}{2} = 10$
+        \item $I_b :=$ Total: $5$ and rights: $4$, Math $\binom{5}{4} = 5$
+        \item $I_c :=$ Total: $9$ and rights: $7$, Math $\binom{9}{7} = 36$
+        \item $I_d :=$ Total: $14$ and rights: $9$, Math $\binom{14}{9} = 2002$ 
+    \end{enumerate}
+    It is impossible to land on both $I_a$ and $I_b$ in a single drive because it takes $5$ moves to land on either one. The set $P = \{I_a, I_b, I_c, I_d\}$ and the possible subsets are:
+    \begin{equation*}
+        J = \{\emptyset, \{I_a\}, \{I_b\}, \{I_c\}, \{I_d\}, \{I_aI_c\}, \{I_aI_d\}, \{I_bI_c\}, \{I_bI_d\}, \{I_cI_d\}, \{I_a I_c I_d\}, \{I_b I_c I_d\}\}
+    \end{equation*}
+    As seen, no subset with both $I_a I_b$ is occuring inside $J$.
+    \begin{equation*}
+\begin{aligned}
+    N_{=}(\emptyset) ={}& 8008 - (10 + 5 + 36 + 2002) + (10 \cdot 36 + 10 \cdot 2002 + 5 \cdot 36 + 5\cdot 2002 + 36 \cdot 2002) \\
+    & - (10 \cdot 36 \cdot 2002 + 5 \cdot 36 \cdot 2002)
+\end{aligned}
+\end{equation*}
     \item Rawr
 \end{enumerate}
 
