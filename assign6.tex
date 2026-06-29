@@ -189,25 +189,36 @@ A taxi drives from the intersection labeled $A$ to the intersection labeled $B$ 
     \begin{equation*}
         \{m_1, m_3, m_5, m_7, m_9, m_{11}, m_{13}, m_{14}, m_{15}, m_{16}\}
     \end{equation*}
-    \item Need to describe the four congested intersections. They will be described as the total number of moves and number of right moves.
+    \item Need to describe the four congested intersections. They will be described as the total number of moves, $I_{jt}$ and number of right moves, $I_{jr}$. The number of ups required is $I_{ju} = I_{jt} - I_{jr}$
     \begin{enumerate}[(i)]
-        \item $I_a :=$ Total: $5$ and rights: $2$, Math $\binom{5}{2} = 10$
-        \item $I_b :=$ Total: $5$ and rights: $4$, Math $\binom{5}{4} = 5$
-        \item $I_c :=$ Total: $9$ and rights: $7$, Math $\binom{9}{7} = 36$
-        \item $I_d :=$ Total: $14$ and rights: $9$, Math $\binom{14}{9} = 2002$ 
+        \item $I_a :=$ Total: $5$, rights: $2$, ups: $3$, Math $\binom{5}{2} = 10$
+        \item $I_b :=$ Total: $5$, rights: $4$, ups: $1$, Math $\binom{5}{4} = 5$
+        \item $I_c :=$ Total: $9$, rights: $7$, ups: $2$, Math $\binom{9}{7} = 36$
+        \item $I_d :=$ Total: $14$, rights: $9$, ups: $5$, Math $\binom{14}{9} = 2002$ 
     \end{enumerate}
-    It is impossible to land on both $I_a$ and $I_b$ in a single drive because it takes $5$ moves to land on either one. The set $P = \{I_a, I_b, I_c, I_d\}$ and the possible subsets are:
+    The set $P = \{I_a, I_b, I_c, I_d\}$ and the possible subsets is the power set of $P$, $\mathscr{P}(P)$. A secondary intersection, $I_2$, can be accessed from a primary intersection, $I_1$ only if the following is true.
     \begin{equation*}
-        J = \{\emptyset, \{I_a\}, \{I_b\}, \{I_c\}, \{I_d\}, \{I_aI_c\}, \{I_aI_d\}, \{I_bI_c\}, \{I_bI_d\}, \{I_cI_d\}, \{I_a I_c I_d\}, \{I_b I_c I_d\}\}
+        I_{2r} > I_{1r} \: \text{ and } I_{2u} > I_{1u}
     \end{equation*}
-    As seen, no subset with both $I_a I_b$ is occuring inside $J$.
+    The secondary intersection requires more right moves and more up moves than the primary intersection. With that being said, it is impossible to access $I_c$ or $I_b$ from $I_a$. These combinations should be removed. So the number of possible movement sequences:
     \begin{equation*}
-\begin{aligned}
-    N_{=}(\emptyset) ={}& 8008 - (10 + 5 + 36 + 2002) + (10 \cdot 36 + 10 \cdot 2002 + 5 \cdot 36 + 5\cdot 2002 + 36 \cdot 2002) \\
-    & - (10 \cdot 36 \cdot 2002 + 5 \cdot 36 \cdot 2002)
-\end{aligned}
-\end{equation*}
-    \item Rawr
+        J = \{\emptyset, \{I_a\}, \{I_b\}, \{I_c\}, \{I_d\}, \{I_aI_d\}, \{I_bI_c\}, \{I_bI_d\}, \{I_cI_d\}, \{I_b I_c I_d\}\}
+    \end{equation*}
+    As seen, no subset with both $I_a I_b$ or $I_a I_c$ is occuring inside $J$. To mathematically account for landing on a secondary intersection after a primary intersection. You need to subtract the number of moves required to reach the primary intesection from the secondary intersection. For example, if you land first on $I_b$, then $I_c$ and finally $I_d$ the number of options appears as the following:
+    \begin{equation*}
+        N_{\ge}(I_b I_c I_d) = \binom{I_{bt}}{I_{br}}\binom{I_{ct}-I_{bt}}{I_{cr}-I_{br}}\binom{I_{dt}-I_{ct}}{I_{dr}-I_{cr}} = \binom{5}{4}\binom{9-5}{7-4}\binom{14-9}{9-7} = \binom{5}{4}\binom{4}{3}\binom{5}{2}
+    \end{equation*}
+    As such $N_{\ge}(I_b I_c I_d) = 5 \cdot 4 \cdot 10 = 200$, where $N_{\ge}(I_b I_c I_d) < N_{\ge}(I_d)$. Which is expected, meaning the number of moves to get to $I_d$ while intesecting $I_b$ and $I_c$ is less than $I_d$ on its own. Calculating the rest of the intersection sequences:
+    \begin{align*}
+    N_{\ge}(I_a I_d) = \binom{5}{2}\binom{14-5}{9-2} = 360 \quad \quad & N_{\ge}(I_b I_c) = \binom{5}{4}\binom{9-5}{7-4} = 20 \\
+    N_{\ge}(I_b I_d) = \binom{5}{4}\binom{14-5}{9-4} = 630 \quad \quad & N_{\ge}(I_c I_d) = \binom{9}{7}\binom{14-9}{9-7} = 360
+    \end{align*}
+    The final answer is:
+    \begin{equation*}
+        N_{=}(\emptyset) = 8008 - (10 + 5 + 36 + 2002) + (360 + 20 + 630 + 360) - 200 = 7125
+    \end{equation*}
+    \textbf{Okay okay, Claude said I was wrong because I need to account for getting all the way across. So basically start at A, then go to $I_b$, then go to $I_c$ then go to $I_d$ and finally finish at $B$. So I need to add on the terms of finishing at $B$, which I don't have currently.}
+    \item Need to start...
 \end{enumerate}
 
 \end{document}
