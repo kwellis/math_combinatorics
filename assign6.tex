@@ -204,20 +204,25 @@ A taxi drives from the intersection labeled $A$ to the intersection labeled $B$ 
     \begin{equation*}
         J = \{\emptyset, \{I_a\}, \{I_b\}, \{I_c\}, \{I_d\}, \{I_aI_d\}, \{I_bI_c\}, \{I_bI_d\}, \{I_cI_d\}, \{I_b I_c I_d\}\}
     \end{equation*}
-    As seen, no subset with both $I_a I_b$ or $I_a I_c$ is occuring inside $J$. To mathematically account for landing on a secondary intersection after a primary intersection. You need to subtract the number of moves required to reach the primary intesection from the secondary intersection. For example, if you land first on $I_b$, then $I_c$ and finally $I_d$ the number of options appears as the following:
-    \begin{equation*}
-        N_{\ge}(I_b I_c I_d) = \binom{I_{bt}}{I_{br}}\binom{I_{ct}-I_{bt}}{I_{cr}-I_{br}}\binom{I_{dt}-I_{ct}}{I_{dr}-I_{cr}} = \binom{5}{4}\binom{9-5}{7-4}\binom{14-9}{9-7} = \binom{5}{4}\binom{4}{3}\binom{5}{2}
-    \end{equation*}
-    As such $N_{\ge}(I_b I_c I_d) = 5 \cdot 4 \cdot 10 = 200$, where $N_{\ge}(I_b I_c I_d) < N_{\ge}(I_d)$. Which is expected, meaning the number of moves to get to $I_d$ while intesecting $I_b$ and $I_c$ is less than $I_d$ on its own. Calculating the rest of the intersection sequences:
+    As seen, no subset with both $I_a I_b$ or $I_a I_c$ is occuring inside $J$. To mathematically account for landing on a secondary intersection after a primary intersection. You need to subtract the number of moves required to reach the primary intesection from the secondary intersection. If only landing on one intersection, you still need to account for finishing at $B$, so the total possible moves is:
+    \begin{align*}
+    N_{\ge}(I_a) = \binom{5}{2}\binom{16-5}{10-2} = 1650 \quad \quad & N_{\ge}(I_b) = \binom{5}{4}\binom{16-5}{10-4} = 2310 \\
+    N_{\ge}(I_c) = \binom{9}{7}\binom{16-9}{10-7} = 1260 \quad \quad & N_{\ge}(I_d) = \binom{14}{9}\binom{16-14}{10-9} = 4004
+    \end{align*}
+    Calculating the double intersection sequences \textbf{Note: Need to add finishing at B}:
     \begin{align*}
     N_{\ge}(I_a I_d) = \binom{5}{2}\binom{14-5}{9-2} = 360 \quad \quad & N_{\ge}(I_b I_c) = \binom{5}{4}\binom{9-5}{7-4} = 20 \\
     N_{\ge}(I_b I_d) = \binom{5}{4}\binom{14-5}{9-4} = 630 \quad \quad & N_{\ge}(I_c I_d) = \binom{9}{7}\binom{14-9}{9-7} = 360
     \end{align*}
-    The final answer is:
+    Calculating the lone triple intersection sequence:
     \begin{equation*}
-        N_{=}(\emptyset) = 8008 - (10 + 5 + 36 + 2002) + (360 + 20 + 630 + 360) - 200 = 7125
+        N_{\ge}(I_b I_c I_d) = \binom{I_{bt}}{I_{br}}\binom{I_{ct}-I_{bt}}{I_{cr}-I_{br}}\binom{I_{dt}-I_{ct}}{I_{dr}-I_{cr}}\binom{A_t}{A_r} = \binom{5}{4}\binom{9-5}{7-4}\binom{14-9}{9-7}\binom{16-14}{10-9}
     \end{equation*}
-    \textbf{Okay okay, Claude said I was wrong because I need to account for getting all the way across. So basically start at A, then go to $I_b$, then go to $I_c$ then go to $I_d$ and finally finish at $B$. So I need to add on the terms of finishing at $B$, which I don't have currently.}
+    As such $N_{\ge}(I_b I_c I_d) = 5 \cdot 4 \cdot 10 \cdot 2 = 400$. The final answer is:
+    \begin{equation*}
+        N_{=}(\emptyset) = 8008 - (1650 + 2310 + 1260 + 4004) + (360 + 20 + 630 + 360) - 200 = xxx
+    \end{equation*}
+    \textbf{Okay okay, Claude said I was wrong because I need to account for getting all the way across. So basically start at A, then go to $I_b$, then go to $I_c$ then go to $I_d$ and finally finish at $B$. So I need to add on the terms for finishing at $B$, which I don't have currently.}
     \item Need to start...
 \end{enumerate}
 
