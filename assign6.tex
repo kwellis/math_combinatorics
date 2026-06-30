@@ -209,10 +209,10 @@ A taxi drives from the intersection labeled $A$ to the intersection labeled $B$ 
     N_{\ge}(I_a) = \binom{5}{2}\binom{16-5}{10-2} = 1650 \quad \quad & N_{\ge}(I_b) = \binom{5}{4}\binom{16-5}{10-4} = 2310 \\
     N_{\ge}(I_c) = \binom{9}{7}\binom{16-9}{10-7} = 1260 \quad \quad & N_{\ge}(I_d) = \binom{14}{9}\binom{16-14}{10-9} = 4004
     \end{align*}
-    Calculating the double intersection sequences \textbf{Note: Need to add finishing at B}:
+    Calculating the double intersection sequences:
     \begin{align*}
-    N_{\ge}(I_a I_d) = \binom{5}{2}\binom{14-5}{9-2} = 360 \quad \quad & N_{\ge}(I_b I_c) = \binom{5}{4}\binom{9-5}{7-4} = 20 \\
-    N_{\ge}(I_b I_d) = \binom{5}{4}\binom{14-5}{9-4} = 630 \quad \quad & N_{\ge}(I_c I_d) = \binom{9}{7}\binom{14-9}{9-7} = 360
+    N_{\ge}(I_a I_d) = \binom{5}{2}\binom{14-5}{9-2}\binom{16-14}{10-9} = 720 \quad \quad & N_{\ge}(I_b I_c) = \binom{5}{4}\binom{9-5}{7-4}\binom{16-9}{10-7} = 700 \\
+    N_{\ge}(I_b I_d) = \binom{5}{4}\binom{14-5}{9-4}\binom{16-14}{10-9} = 1260 \quad \quad & N_{\ge}(I_c I_d) = \binom{9}{7}\binom{14-9}{9-7}\binom{16-14}{10-9} = 720
     \end{align*}
     Calculating the lone triple intersection sequence:
     \begin{equation*}
@@ -220,9 +220,8 @@ A taxi drives from the intersection labeled $A$ to the intersection labeled $B$ 
     \end{equation*}
     As such $N_{\ge}(I_b I_c I_d) = 5 \cdot 4 \cdot 10 \cdot 2 = 400$. The final answer is:
     \begin{equation*}
-        N_{=}(\emptyset) = 8008 - (1650 + 2310 + 1260 + 4004) + (360 + 20 + 630 + 360) - 200 = xxx
+        N_{=}(\emptyset) = 8008 - (1650 + 2310 + 1260 + 4004) + (720 + 700 + 1260 + 720) - 400 = 1784
     \end{equation*}
-    \textbf{Okay okay, Claude said I was wrong because I need to account for getting all the way across. So basically start at A, then go to $I_b$, then go to $I_c$ then go to $I_d$ and finally finish at $B$. So I need to add on the terms for finishing at $B$, which I don't have currently.}
     \item Need to start...
 \end{enumerate}
 
