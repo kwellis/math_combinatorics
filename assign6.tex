@@ -212,19 +212,27 @@ A taxi drives from the intersection labeled $A$ to the intersection labeled $B$ 
     Calculating the double intersection sequences:
     \begin{align*}
     N_{\ge}(I_a I_d) = \binom{5}{2}\binom{14-5}{9-2}\binom{16-14}{10-9} = 720 \quad \quad & N_{\ge}(I_b I_c) = \binom{5}{4}\binom{9-5}{7-4}\binom{16-9}{10-7} = 700 \\
-    N_{\ge}(I_b I_d) = \binom{5}{4}\binom{14-5}{9-4}\binom{16-14}{10-9} = 1260 \quad \quad & N_{\ge}(I_c I_d) = \binom{9}{7}\binom{14-9}{9-7}\binom{16-14}{10-9} = 720
+    N_{\ge}(I_b I_d) = \binom{5}{4}\binom{14-5}{9-4}\binom{16-14}{10-9} = 1260 \quad \quad & N_{\ge}(I_b I_d) = \binom{9}{7}\binom{14-9}{9-7}\binom{16-14}{10-9} = 720
     \end{align*}
     Calculating the lone triple intersection sequence:
     \begin{equation*}
-        N_{\ge}(I_b I_c I_d) = \binom{I_{bt}}{I_{br}}\binom{I_{ct}-I_{bt}}{I_{cr}-I_{br}}\binom{I_{dt}-I_{ct}}{I_{dr}-I_{cr}}\binom{A_t}{A_r} = \binom{5}{4}\binom{9-5}{7-4}\binom{14-9}{9-7}\binom{16-14}{10-9}
+        N_{\ge}(I_b I_c I_d) = \binom{I_{bt}}{I_{br}}\binom{I_{ct}-I_{bt}}{I_{cr}-I_{br}}\binom{I_{dt}-I_{ct}}{I_{dr}-I_{cr}}\binom{A_t - I_{dt}}{A_r - I_{dr}} = \binom{5}{4}\binom{9-5}{7-4}\binom{14-9}{9-7}\binom{16-14}{10-9}
     \end{equation*}
     As such $N_{\ge}(I_b I_c I_d) = 5 \cdot 4 \cdot 10 \cdot 2 = 400$. The final answer is:
     \begin{equation*}
         N_{=}(\emptyset) = 8008 - (1650 + 2310 + 1260 + 4004) + (720 + 700 + 1260 + 720) - 400 = 1784
     \end{equation*}
-    \item Use Thm 3.1.5, I feel like you start with $8008$ again, but we aren't taking away the single intersections? Just the doubles and above? Where $|S| = 1$.
+    \item The clean answer for the problem is:
     \begin{equation*}
-        (-1)^{0-1}*8008 + (-1)^{1-1}*(1650 + 2310 + 1260 + 4004) = -8008 + 9224 = 1216
+        N_{\le}(1) = N_{=}(\emptyset) + N_{=}(1)
+    \end{equation*}
+    We alredy have $N_{=}(\emptyset)$ from part b. We now need to compute $N_{=}(1)$ and add it to part b. This can be done with the general inclusion-exclusion formula. Where:
+    \begin{equation*}
+        N_{=}(S) = \sum_{J: S \subseteq J \subseteq P} (-1)^{|J|-|S|} N_{\ge}(J)
+    \end{equation*}
+    The big thing that occurs is because of the addition of $|S|$ the signs of $+$ or $-$ swap. So we have.
+    \begin{equation*}
+        N_{=}(1) = (1650 + 2310 + 1260 + 4004) - (720 + 700 + 1260 + 720) + 400 = 6224
     \end{equation*}
 \end{enumerate}
 
