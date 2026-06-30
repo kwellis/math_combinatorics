@@ -7,3 +7,4 @@ z_proof_hammack.pdf
 \_minted*
 \.venv
 *.py
+*.out

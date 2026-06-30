@@ -1,0 +1,69 @@
+\documentclass{article}
+
+\newcommand{\doctitle}{Assignment 7} % change document title
+\usepackage{ellis_header}
+
+\begin{document}
+
+\section{Chapter 3.2}
+\setcounter{problem}{2}
+\begin{problem} % Problem 3
+Prove that for $n \ge 2$
+\begin{equation*}
+    \prod_{j=2}^{n} \left (1 - \dfrac{1}{j^2} \right ) = \dfrac{n+1}{2n}
+\end{equation*}
+\end{problem}
+
+\setcounter{problem}{6}
+\begin{problem} % Problem 7
+Give a combinatorial proof: for $n \ge 1$
+\begin{equation*}
+    \sum_{j=1}^{n} j! < (n+1)!
+\end{equation*}
+Do so by asking a question and then performing a deliberate under- or over- count with one of the answers.
+\end{problem}
+
+\setcounter{problem}{8}
+\begin{problem} % Problem 9
+For the recurrence relation showin in (3.6), page 99, we proved $L_n < 2^n$ for $n \ge 1$.
+\begin{enumerate}
+    \item Prove the tighter inequality $L_n \le 1.7^n$. At what value of $n$ should you start the induction?
+    \item What is so special about the number $1.7$? Adjust your work in the first part to create the tightest bound you can.
+\end{enumerate}
+\end{problem}
+
+\section{Chapter 3.3}
+\setcounter{problem}{1}
+\begin{problem} %problem 2
+    In each case, find a concise OGF for answering the question and also identify what coefficient you need.
+    \begin{enumerate}
+        \item How many ways are there to distribute 14 forks to 10 people so that each person receives one or two forks?
+        \item You can buy soda either by the can, or in 6, 12, 24 or 30 packs. How many ways are there to buy exactly $k$ cans of soda?
+        \item How many ways are there to put a total postage of 75 cents on an evelope, using 3, 5, 10 and 12 cent stamps?
+        \item At the movies you select 24 pieces of candy from among five different types. How many ways can you do this if you want at least two pieces of each type?
+        \item How many solutions to $z_1 +z_2 + z_3 =15$ are there, where the $z_i$ are integers satisfying $0 \le z_i \le 8$?
+        \item How many ways are there to make change for a dollar using only pennies, nickels, dimes and quarters?
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}%problem 3
+    Find the coefficient of $\dots$
+    \begin{enumerate}
+        \item $x^{60}$ in $\dfrac{1}{(1-x)^{23}}$
+        \item $x^{k}$ in $\dfrac{1+x+x^4}{(1-x)^5}$
+        \item $x^{3}$ in $\dfrac{x}{(1-x)^8}$
+        \item $x^{50}$ in $(x^9 + x^{10} + x^{11} + \cdots)^3$
+        \item $x^{k-1}$ in $\dfrac{1 + x}{(1-2x)^5}$
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}%problem 4
+    A professor grades an exam that has 20 questions worth five points each. The professor awards zero, two, four or five points on each problem. Find a concise OGF that can be used to determine the number of ways to obtain an exam score of $k$ points.
+\end{problem}
+
+\setcounter{problem}{6}
+\begin{problem}%problem 7
+    Find the number of solutions to $z_1 + z_2 + z_3 + z_4 = 10$ where the $z_i$ are nonnegative integers such that $z_1 \le 4$, $z_2$ is odd, $z_3$ is prime and $z_4 \in \{1, 2, 3, 6, 8\}$.
+\end{problem}
+
+\end{document}
