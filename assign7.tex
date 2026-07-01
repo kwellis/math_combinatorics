@@ -14,6 +14,26 @@ Prove that for $n \ge 2$
 \end{equation*}
 \end{problem}
 
+\textbf{Answer:}
+\begin{proof}
+    Base case: Using when $n = 2$ provides:
+    \begin{equation*}
+        \underbrace{\left (1 - \dfrac{1}{2^2} \right ) = \dfrac{4-1}{4} = \dfrac{3}{4}}_{LHS} == \underbrace{\dfrac{2+1}{2 \cdot 2} = \dfrac{3}{4}}_{RHS}
+    \end{equation*}
+    The inductive hypothesis is: $\prod_{j=2}^{k} \left (1 - \dfrac{1}{j^2} \right ) = \dfrac{k+1}{2k}$. Starting with the left hand side.
+    \begin{align*}
+        \prod_{j=2}^{k+1} \left (1 - \dfrac{1}{j^2} \right ) &= \left (1 - \dfrac{1}{(k+1)^2} \right ) \prod_{j=2}^{k} \left (1 - \dfrac{1}{j^2} \right ) \quad \text{break up terms}  \\
+        & = \left (1 - \dfrac{1}{(k+1)^2} \right ) \left ( \dfrac{k+1}{2k} \right ) \quad \text{use IHYP}\\
+        & = \left (\dfrac{(k+1)^2}{(k+1)^2} - \dfrac{1}{(k+1)^2} \right ) \left ( \dfrac{k+1}{2k} \right ) \quad \text{algebra!!!}\\
+        & = \left (\dfrac{(k+1)^2 - 1}{(k+1)^2} \right ) \left ( \dfrac{k+1}{2k} \right ) \\
+        & = \dfrac{(k+1)^2 - 1}{2k(k+1)} \\
+        & = \dfrac{k^2 + 2k + 1 - 1}{2k(k+1)} \\
+        & = \dfrac{k(k+2)}{2k(k+1)} \\
+        & = \dfrac{(k+1)+1}{2(k+1)} \quad \text{Done}
+    \end{align*}
+Therefore $S(k+1)$ is true, so $S(n)$ is true for all $n \ge 1$.
+\end{proof}
+
 \setcounter{problem}{6}
 \begin{problem} % Problem 7
 Give a combinatorial proof: for $n \ge 1$
